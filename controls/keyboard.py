@@ -2,20 +2,20 @@ import pygame
 
 pygame.init()
 
-presets = {'keyW': pygame.K_w,
-           'keyA': pygame.K_a,
-           'keyS': pygame.K_s,
-           'keyD': pygame.K_d,
-           'keySpace': pygame.K_SPACE,
-           'keyEnter': pygame.K_RETURN,
-           'keyEscape': pygame.K_ESCAPE}
-controls = {'keyW': False,
-            'keyA': False,
-            'keyS': False,
-            'keyD': False,
-            'keySpace': False,
-            'keyEnter': False,
-            'keyEscape': False}
+presets = {'key_w': pygame.K_w,
+           'key_a': pygame.K_a,
+           'key_s': pygame.K_s,
+           'key_d': pygame.K_d,
+           'key_space': pygame.K_SPACE,
+           'key_enter': pygame.K_RETURN,
+           'key_escape': pygame.K_ESCAPE}
+controls = {'key_w': False,
+            'key_a': False,
+            'key_s': False,
+            'key_d': False,
+            'key_space': False,
+            'key_enter': False,
+            'key_escape': False}
 
 
 def listen(event):
