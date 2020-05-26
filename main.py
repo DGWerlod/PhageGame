@@ -4,6 +4,7 @@ from pygame.locals import *
 import constants
 from logic import collisions
 from controls import keyboard, mouse
+from entities.bacteriophages.bacteriophage import Bacteriophage
 
 # from entities.bacteriophages.bacteriophage import Bacteriophage
 # from entities.macrophages.macrophage import Macrophage
@@ -13,7 +14,7 @@ flags = DOUBLEBUF
 
 pygame.init()
 
-window = pygame.display.set_mode((400, 400), flags)
+window = pygame.display.set_mode((500, 500), flags)
 window.set_alpha(None)
 pygame.display.set_caption("PhageGame")
 clock = pygame.time.Clock()
@@ -56,9 +57,13 @@ def main():
     # bacteriophage_walls = [Wall(), Wall(), Wall()]
     # bacteriophage_summoner = Summoner()
 
+    bacteriophages.add(Bacteriophage(0,0,125,125,5,1,1,"buffteriophage"))
+
     running = True
 
     while running:
+
+        window.fill(constants.BLUE)
 
         # if collisions.rect_point(macrophage_summoner.get_rect(), mouse.controls['pos']):
         #     macrophages.add(Macrophage())
@@ -68,13 +73,17 @@ def main():
         for m in macrophages:
             in_front = get_microbe_in_front(bacteriophages, not macrophage_side)
             m.go(window, in_front)
-            if not in_front.is_alive():
+            if in_front and not in_front.is_alive():
                 bacteriophages.remove(in_front)
         for b in bacteriophages:
             in_front = get_microbe_in_front(macrophages, macrophage_side)
             b.go(window, in_front)
-            if not in_front.is_alive():
+            if in_front and not in_front.is_alive():
                 macrophages.remove(in_front)
+            if keyboard.controls['key_w'] and not keyboard.controls['key_s']:
+                b._spd = max(1, b._spd - 1)
+            if keyboard.controls['key_s'] and not keyboard.controls['key_w']:
+                b._spd = min(15, b._spd + 1)
 
         # Update Window
         pygame.display.update()
