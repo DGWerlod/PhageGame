@@ -47,16 +47,15 @@ M method_name(Type argument=default, ...) → Return_Type
 - F _name → str
 + M get_rect() → Rect
 + M draw(pygame.Surface display) → None
-+ M go() → ????? something, inevitably
++ M go(pygame.Surface display) → ????? something, inevitably
 
 #### Microbe (Entity)
 - F _spd → float
 - F _hp → int
-- F _is_alive → bool
 - F _dmg → int
 + M is_alive() → bool
 + M attack(Microbe target) → ????? something, inevitably
-+ M apply_damage() → bool?
++ M apply_damage(int dmg) → bool?
 + M pos() → None
 
 #### HUD (Entity)
@@ -85,7 +84,7 @@ M method_name(Type argument=default, ...) → Return_Type
 ## ./img
 
 #### Images (N/A)
-- F images → {str : {str : pygame.Surface[]}}
+- F IMAGES → {str : {str : pygame.Surface[]}}
 
 ## ./fonts
 
@@ -105,8 +104,7 @@ M method_name(Type argument=default, ...) → Return_Type
 #### Circle (object)
 - F X → float
 - F Y → float
-- F W → float
-- F H → float
+- F R → float
 
 #### Collisions (N/A)
 #### Graphics (N/A)
