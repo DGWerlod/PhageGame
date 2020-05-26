@@ -77,7 +77,7 @@ Class_Name (Superclass_Name)
 
 \+ pos() → None
 
-#### Tower (Entity)
+#### Wall (Entity)
 
 #### Base (Entity)
 
