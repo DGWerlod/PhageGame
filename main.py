@@ -6,8 +6,8 @@ flags = DOUBLEBUF
 
 pygame.init()
 
-ctx = pygame.display.set_mode((400, 400), flags)
-ctx.set_alpha(None)
+window = pygame.display.set_mode((400, 400), flags)
+window.set_alpha(None)
 pygame.display.set_caption("PhageGame")
 clock = pygame.time.Clock()
 

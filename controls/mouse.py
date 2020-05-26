@@ -2,7 +2,9 @@ import pygame
 
 pygame.init()
 
-mouse = {'pos': pygame.mouse.get_pos(), 'click': 0, 'held': 0}
+mouse = {'pos': pygame.mouse.get_pos(),
+         'click': 0,
+         'held': 0}
 
 
 def listen():

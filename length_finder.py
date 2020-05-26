@@ -1,6 +1,6 @@
 files = ["constants.py", "generator.py", "main.py", "rooms.py",
          "controls/keyboard.py", "controls/mouse.py",
-         "fonts/text.py",
+         "fonts/fonts.py",
          "img/images.py",
          "logic/collisions.py", "logic/graphics.py", "logic/matrices.py",
          "objects/actor.py", "objects/boss.py", "objects/bullet.py", "objects/character.py", "objects/circle.py",
