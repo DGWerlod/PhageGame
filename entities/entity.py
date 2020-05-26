@@ -1,3 +1,4 @@
+from img.images import IMAGES
 from logic.rect import Rect
 
 
@@ -13,7 +14,7 @@ class Entity(object):
         return Rect(self.x, self.y, self.w, self.h)
 
     def draw(self, display):
-        pass
+        display.blit(IMAGES[self.name], (self.x, self.y))
 
     def go(self, display):
         self.draw(display)
