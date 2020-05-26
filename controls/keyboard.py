@@ -2,13 +2,13 @@ import pygame
 
 pygame.init()
 
-presets = {'key_w': pygame.K_w,
-           'key_a': pygame.K_a,
-           'key_s': pygame.K_s,
-           'key_d': pygame.K_d,
-           'key_space': pygame.K_SPACE,
-           'key_enter': pygame.K_RETURN,
-           'key_escape': pygame.K_ESCAPE}
+presets = {pygame.K_w: 'key_w',
+           pygame.K_a: 'key_a',
+           pygame.K_s: 'key_s',
+           pygame.K_d: 'key_d',
+           pygame.K_SPACE: 'key_space',
+           pygame.K_RETURN: 'key_enter',
+           pygame.K_ESCAPE: 'key_escape'}
 controls = {'key_w': False,
             'key_a': False,
             'key_s': False,
@@ -20,10 +20,8 @@ controls = {'key_w': False,
 
 def listen(event):
     if event.type == pygame.KEYDOWN:
-        for p in presets:
-            if event.key == presets[p]:
-                controls[p] = True
+        if event.key in presets:
+            controls[presets[event.key]] = True
     elif event.type == pygame.KEYUP:
-        for p in presets:
-            if event.key == presets[p]:
-                controls[p] = False
+        if event.key in presets:
+            controls[presets[event.key]] = False
