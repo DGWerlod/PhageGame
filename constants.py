@@ -21,5 +21,5 @@ for s in SIZES:
     MULI[str(s)] = pygame.font.Font(SOURCE, s)
 
 # SIDES
-LEFT = True
-RIGHT = False
+LEFT, MACROPHAGE_SIDE = True
+RIGHT, BACTERIOPHAGE_SIDE = False
