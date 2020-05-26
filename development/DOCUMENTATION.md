@@ -8,31 +8,37 @@ Class_Name (Superclass_Name)
 
 #### Constructors:
 
-C constructor_name(Param_Type type1, ...)
+\* constructor_name(Param_Type type1, ...)
 
 #### Fields:
 
-F public_field_name → Type
+\- public_field_name → Type
 
-F _private_field_name → Type
+\- _private_field_name → Type
 
 #### Methods:
 
-M method_name(Type argument=default, ...) → Return_Type
+\+ method_name(Type argument=default, ...) → Return_Type
 
 ## ./
 
 #### Level (object)
-- F _microbes_available → Microbe{}
-- F _upgrades_enabled → {str}
-- F _possible_upgrades → {str}
-- F _upgrade_controlled_values → various
-+ M get_upgrade_controlled_values(various) → various
-+ M set_upgrade(something) → bool
+\- _microbes_available → Microbe{}
+
+\- _upgrades_enabled → {str}
+
+\- _possible_upgrades → {str}
+
+\- _upgrade_controlled_values → various
+
+\+ get_upgrade_controlled_values(various) → various
+
+\+ set_upgrade(something) → bool
 
 #### ∀ Level{#} (Level)
-- F _name → str
-+ M draw(pygame.Surface display) → None
+\- _name → str
+
+\+ draw(pygame.Surface display) → None
 
 #### Constants (N/A)
 #### Main (N/A)
@@ -40,23 +46,40 @@ M method_name(Type argument=default, ...) → Return_Type
 ## ./entities
 
 #### Entity (object)
-- F _x → float
-- F _y → float
-- F _w → float
-- F _h → float
-- F _name → str
-+ M get_rect() → Rect
-+ M draw(pygame.Surface display) → None
-+ M go(pygame.Surface display) → ????? something, inevitably
+\- _x → float
+
+\- _y → float
+
+\- _w → float
+
+\- _h → float
+
+\- _name → str
+
+\+ get_rect() → Rect
+
+\+ draw(pygame.Surface display) → None
+
+\+ go(pygame.Surface display) → ????? something, inevitably
 
 #### Microbe (Entity)
-- F _spd → float
-- F _hp → int
-- F _dmg → int
-+ M is_alive() → bool
-+ M attack(Microbe target) → ????? something, inevitably
-+ M apply_damage(int dmg) → bool?
-+ M pos() → None
+\- _spd → float
+
+\- _hp → int
+
+\- _dmg → int
+
+\+ is_alive() → bool
+
+\+ attack(Microbe target) → ????? something, inevitably
+
+\+ apply_damage(int dmg) → bool?
+
+\+ pos() → None
+
+#### Tower (Entity)
+
+#### Base (Entity)
 
 #### HUD (Entity)
 
@@ -73,8 +96,9 @@ M method_name(Type argument=default, ...) → Return_Type
 ## ./entities/buttons
 
 #### Button (Entity)
-- F _text_key → str
-- F _text_template → str
+\- _text_key → str
+
+\- _text_template → str
 
 #### Upgrade (Button)
 #### System (Button)
@@ -84,27 +108,34 @@ M method_name(Type argument=default, ...) → Return_Type
 ## ./img
 
 #### Images (N/A)
-- F IMAGES → {str : {str : pygame.Surface[]}}
+\- IMAGES → {str : {str : pygame.Surface[]}}
 
 ## ./fonts
 
 #### Text (N/A)
-- F _font → pygame.font.Font
-- F RENDERED_TEXT → {str : (pygame.Surface, pygame.Rect)}
-+ M prepare_text(str to_prepare) → (pygame.Surface, pygame.Rect)
+\- _font → pygame.font.Font
+
+\- RENDERED_TEXT → {str : (pygame.Surface, pygame.Rect)}
+
+\+ prepare_text(str to_prepare) → (pygame.Surface, pygame.Rect)
 
 ## ./logic
 
 #### Rect (object)
-- F X → float
-- F Y → float
-- F W → float
-- F H → float
+\- X → float
+
+\- Y → float
+
+\- W → float
+
+\- H → float
 
 #### Circle (object)
-- F X → float
-- F Y → float
-- F R → float
+\- X → float
+
+\- Y → float
+
+\- R → float
 
 #### Collisions (N/A)
 #### Graphics (N/A)
