@@ -1,55 +1,62 @@
 from math import hypot
 
-def rectPoint(rect,point):
-    if rect.x < point[0]:
-        if rect.x + rect.w > point[0]:
-            if rect.y < point[1]:
-                if rect.h + rect.y > point[1]:
+
+def rect_point(rect, point):
+    if rect.X < point[0]:
+        if rect.X + rect.W > point[0]:
+            if rect.Y < point[1]:
+                if rect.H + rect.Y > point[1]:
                     return True
     return False
 
-def rectangles(a,b): # exception is for player's rBall addition
-    if a.x < b.x + b.w:
-        if a.x + a.w > b.x:
-            if a.y < b.y + b.h:
-                if a.h + a.y > b.y:
-                    dx = abs((a.x+a.w/2)-(b.x+b.w/2)) / b.w
-                    dy = abs((a.y+a.h/2)-(b.y+b.h/2)) / b.h
-                    if dy < dx: return 1
-                    else: return 2
+
+def rectangles(a, b):  # exception is for player's rBall addition
+    if a.X < b.X + b.W:
+        if a.X + a.W > b.X:
+            if a.Y < b.Y + b.H:
+                if a.H + a.Y > b.Y:
+                    dx = abs((a.X + a.W / 2) - (b.X + b.W / 2)) / b.W
+                    dy = abs((a.Y + a.H / 2) - (b.Y + b.H / 2)) / b.H
+                    if dy < dx:
+                        return 1
+                    else:
+                        return 2
     return 0
 
-def circles(a,b):
+
+def circles(a, b):
     # if distance between their centers is less than the sum of their radii
-    dx = abs(a.x - b.x)
-    dy = abs(a.y - b.y)
-    dt = hypot(dx,dy)
-    if dt < a.r + b.r:
+    dx = abs(a.X - b.X)
+    dy = abs(a.Y - b.Y)
+    dt = hypot(dx, dy)
+    if dt < a.R + b.R:
         return True
     return False
 
-# noinspection SpellCheckingInspection
-def circleRect(circ,rect):
+
+def circle_rect(circle, rect):
     # get x and y distance from their centers
-    dx = abs(circ.x - rect.x - rect.w / 2)
-    dy = abs(circ.y - rect.y - rect.h / 2)
-    dxMin = abs(rect.w / 2) + circ.r
-    dyMin = abs(rect.h / 2) + circ.r
+    dx = abs(circle.X - rect.X - rect.W / 2)
+    dy = abs(circle.Y - rect.Y - rect.H / 2)
+    dx_min = abs(rect.W / 2) + circle.R
+    dy_min = abs(rect.H / 2) + circle.R
 
     # test collision, return false if not colliding
-    if dx > dxMin: return False
-    elif dy > dyMin: return False
-    # elif dx <= rect.w / 2: return True
-    # elif dy <= rect.h / 2: return True
+    if dx > dx_min:
+        return False
+    elif dy > dy_min:
+        return False
+    # elif dx <= rect.W / 2: return True
+    # elif dy <= rect.H / 2: return True
 
     # find bounce direction, return associated number
-    if dy / rect.h < dx / rect.w: # ratios dissociate from unequal sides of rectangles
-        if dx + abs(circ.spd[0]) <= dxMin: # if this function would return true next tick
-            return 3 # flip both directions
+    if dy / rect.H < dx / rect.W:  # ratios dissociate from unequal sides of rectangles
+        if dx + abs(circle.spd[0]) <= dx_min:  # if this function would return true next tick
+            return 3  # flip both directions
         else:
-            return 1 # flip x direction
-    else: # dx / rect.w < dy / rect.h:
-        if dy + abs(circ.spd[1]) <= dyMin:
-            return 3 # flip both directions
+            return 1  # flip x direction
+    else:  # dx / rect.W < dy / rect.H:
+        if dy + abs(circle.spd[1]) <= dy_min:
+            return 3  # flip both directions
         else:
-            return 2 # flip y direction
+            return 2  # flip y direction
