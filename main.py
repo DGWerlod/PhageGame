@@ -8,8 +8,8 @@ from controls import keyboard, mouse
 from entities.base import Base
 from entities.wall import Wall
 from entities.buttons.summoner import Summoner
-from entities.macrophages.macrophage import Macrophage
-from entities.bacteriophages.bacteriophage import Bacteriophage
+from entities.bacteriophages.b_basic import B_Basic
+from entities.macrophages.m_basic import M_Basic
 
 
 flags = DOUBLEBUF
@@ -63,7 +63,8 @@ def main():
     #                     Wall(250, 300, 100, constants.BACTERIOPHAGE_SIDE, 1)]
     # bacteriophage_summoner = Summoner(0, 100, 100, 100, constants.BACTERIOPHAGE_SIDE)
 
-    bacteriophages.add(Bacteriophage(0, 0, 125, 125, 5, 1, 1, "buffteriophage", "walk", 5))
+    macrophages.add(M_Basic())
+    bacteriophages.add(B_Basic())
 
     running = True
 
@@ -91,11 +92,14 @@ def main():
             b.go(window)
             if in_front and not in_front.is_alive():
                 macrophages.remove(in_front)
+
+            # here be jankiness
             if keyboard.controls['key_w'] and not keyboard.controls['key_s']:
                 b._animation_spd = max(1, b._animation_spd - 1)
             if keyboard.controls['key_s'] and not keyboard.controls['key_w']:
                 b._animation_spd = min(15, b._animation_spd + 1)
 
+        # debugging visuals
         pygame.draw.line(window, (0, 255, 0), (0, constants.GAME_HEIGHT / 4),
                          (constants.GAME_WIDTH, constants.GAME_HEIGHT / 4), 3)
         pygame.draw.line(window, (0, 255, 0), (0, constants.GAME_HEIGHT/4*3),
