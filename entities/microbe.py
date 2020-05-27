@@ -1,4 +1,5 @@
 from entities.entity import Entity
+from logic import collisions
 
 
 class Microbe(Entity):
@@ -8,12 +9,15 @@ class Microbe(Entity):
         self._hp = hp
         self._dmg = dmg
         self._in_front = None
+        self._cooldown_timer = 30
+        self._cooldown_left = 0
 
     def is_alive(self):
         return self._hp > 0
 
-    def attack(self, target):
-        pass
+    def try_attack(self, target):
+        if self._cooldown_left == 0:
+            target.apply_damage(self._dmg)
 
     def apply_damage(self, dmg):
         self._hp -= dmg
@@ -22,8 +26,19 @@ class Microbe(Entity):
         self._in_front = in_front
 
     def pos(self):
-        pass
+        raise Exception("Something isn't right - you shouldn't be seeing this message!")
 
     def go(self, display):
         super().go(display)
-        self.pos()
+        if self._in_front and collisions.rectangles(self.get_rect(), self._in_front.get_rect()):
+            if self._cooldown_left <= 0:
+                self._in_front.apply_damage(self._dmg)
+                # debug printing
+                # noinspection PyProtectedMember
+                print(self._name + " attacks " + self._in_front._name + " for " + str(self._dmg) + " damage!\n" +
+                      "(" + str(self._in_front._hp) + " hp remaining)")
+                self._cooldown_left = self._cooldown_timer
+        else:
+            self.pos()
+        if self._cooldown_left > 0:
+            self._cooldown_left -= 1
