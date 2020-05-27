@@ -20,5 +20,9 @@ IMAGES = {
                             pygame.image.load("img/macrophoot/frame7.png"),
                             pygame.image.load("img/macrophoot/frame8.png")],
                    "static": [pygame.image.load("img/macrophoot/frame1.png")]
-                   }
+                   },
+    "macrophage_summoner":    {"active": [pygame.image.load("img/buttons/footbutton.png")],
+                               "inactive": [pygame.image.load("img/buttons/footbutton.png")]},
+    "bacteriophage_summoner": {"active": [pygame.image.load("img/buttons/buffbutton.png")],
+                               "inactive": [pygame.image.load("img/buttons/buffbutton.png")]},
 }

@@ -18,7 +18,7 @@ class Entity(object):
 
     def draw(self, display):
         if self._current_animation is None:
-            now_image = IMAGES[self._name]
+            now_image = IMAGES[self._name]["active"][0]
         elif self._animation_spd == 0:
             raise ValueError("An entity cannot have an animation and an animation speed of zero.")
         else:
