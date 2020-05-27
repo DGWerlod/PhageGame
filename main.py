@@ -63,7 +63,7 @@ def main():
     #                     Wall(250, 300, 100, constants.BACTERIOPHAGE_SIDE, 1)]
     # bacteriophage_summoner = Summoner(0, 100, 100, 100, constants.BACTERIOPHAGE_SIDE)
 
-    bacteriophages.add(Bacteriophage(0, 0, 125, 125, 5, 1, 1, "buffteriophage"))
+    bacteriophages.add(Bacteriophage(0, 0, 125, 125, 5, 1, 1, "buffteriophage", "walk", 5))
 
     running = True
 
@@ -81,18 +81,20 @@ def main():
 
         for m in macrophages:
             in_front = get_microbe_in_front(bacteriophages, constants.BACTERIOPHAGE_SIDE)
-            m.go(window, in_front)
+            m.set_in_front(in_front)
+            m.go(window)
             if in_front and not in_front.is_alive():
                 bacteriophages.remove(in_front)
         for b in bacteriophages:
             in_front = get_microbe_in_front(macrophages, macrophage_side)
-            b.go(window, in_front)
+            b.set_in_front(in_front)
+            b.go(window)
             if in_front and not in_front.is_alive():
                 macrophages.remove(in_front)
             if keyboard.controls['key_w'] and not keyboard.controls['key_s']:
-                b._spd = max(1, b._spd - 1)
+                b._animation_spd = max(1, b._animation_spd - 1)
             if keyboard.controls['key_s'] and not keyboard.controls['key_w']:
-                b._spd = min(15, b._spd + 1)
+                b._animation_spd = min(15, b._animation_spd + 1)
 
         pygame.draw.line(window, (0, 255, 0), (0, constants.GAME_HEIGHT / 4),
                          (constants.GAME_WIDTH, constants.GAME_HEIGHT / 4), 3)
