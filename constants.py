@@ -3,7 +3,7 @@ import pygame
 pygame.font.init()
 
 # GENERAL VARIABLES
-GAME_WIDTH, GAME_HEIGHT = 900, 600
+GAME_WIDTH, GAME_HEIGHT = 1200, 500
 
 # COLORS
 BLACK = (0, 0, 0)

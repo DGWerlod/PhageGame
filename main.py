@@ -16,7 +16,7 @@ flags = DOUBLEBUF
 
 pygame.init()
 
-window = pygame.display.set_mode((500, 500), flags)
+window = pygame.display.set_mode((constants.GAME_WIDTH, constants.GAME_HEIGHT), flags)
 window.set_alpha(None)
 pygame.display.set_caption("PhageGame")
 clock = pygame.time.Clock()
@@ -93,6 +93,12 @@ def main():
                 b._spd = max(1, b._spd - 1)
             if keyboard.controls['key_s'] and not keyboard.controls['key_w']:
                 b._spd = min(15, b._spd + 1)
+
+        pygame.draw.line(window, (0, 255, 0), (0, constants.GAME_HEIGHT / 4),
+                         (constants.GAME_WIDTH, constants.GAME_HEIGHT / 4), 3)
+        pygame.draw.line(window, (0, 255, 0), (0, constants.GAME_HEIGHT/4*3),
+                         (constants.GAME_WIDTH, constants.GAME_HEIGHT/4*3), 3)
+        pygame.draw.rect(window, (255, 0, 255), pygame.Rect(700, constants.GAME_HEIGHT/2, 100, 125))
 
         # Update Window
         pygame.display.update()
