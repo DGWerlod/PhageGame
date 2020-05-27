@@ -54,14 +54,14 @@ def main():
     # macrophage_walls = [Wall(50, 300, 100, constants.MACROPHAGE_SIDE, 3),
     #                     Wall(150, 300, 100, constants.MACROPHAGE_SIDE, 2),
     #                     Wall(250, 300, 100, constants.MACROPHAGE_SIDE, 1)]
-    # macrophage_summoner = Summoner(0, 0, 100, 100, constants.MACROPHAGE_SIDE)
+    macrophage_summoner = Summoner(0, 375, 100, 100, constants.MACROPHAGE_SIDE)
 
     bacteriophages = set()
     # bacteriophage_base = Base(0, 300, 100, constants.BACTERIOPHAGE_SIDE)
     # macrophage_walls = [Wall(50, 300, 100, constants.BACTERIOPHAGE_SIDE, 3),
     #                     Wall(150, 300, 100, constants.BACTERIOPHAGE_SIDE, 2),
     #                     Wall(250, 300, 100, constants.BACTERIOPHAGE_SIDE, 1)]
-    # bacteriophage_summoner = Summoner(0, 100, 100, 100, constants.BACTERIOPHAGE_SIDE)
+    bacteriophage_summoner = Summoner(1075, 375, 100, 100, constants.BACTERIOPHAGE_SIDE)
 
     macrophages.add(M_Basic())
     bacteriophages.add(B_Basic())
@@ -72,13 +72,13 @@ def main():
 
         window.fill(constants.BLUE)
 
-        # if collisions.rect_point(macrophage_summoner.get_rect(), mouse.controls['pos']):
-        #     macrophages.add(Macrophage())
-        # elif collisions.rect_point(bacteriophage_summoner.get_rect(), mouse.controls['pos']):
-        #     bacteriophages.add(Bacteriophage())
+        if collisions.rect_point(macrophage_summoner.get_rect(), mouse.controls['pos']):
+            macrophages.add(M_Basic())
+        elif collisions.rect_point(bacteriophage_summoner.get_rect(), mouse.controls['pos']):
+            bacteriophages.add(B_Basic())
 
-        # macrophage_summoner.go(window)
-        # bacteriophage_summoner.go(window)
+        macrophage_summoner.go(window)
+        bacteriophage_summoner.go(window)
 
         for m in macrophages:
             in_front = get_microbe_in_front(bacteriophages, constants.BACTERIOPHAGE_SIDE)
