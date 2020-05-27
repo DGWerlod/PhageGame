@@ -28,7 +28,7 @@ def listen():
             return False
         else:
             keyboard.listen(event)
-            mouse.listen()
+    mouse.listen()
     return True
 
 
@@ -72,10 +72,11 @@ def main():
 
         window.fill(constants.BLUE)
 
-        if collisions.rect_point(macrophage_summoner.get_rect(), mouse.controls['pos']):
-            macrophages.add(M_Basic())
-        elif collisions.rect_point(bacteriophage_summoner.get_rect(), mouse.controls['pos']):
-            bacteriophages.add(B_Basic())
+        if mouse.controls['click']:
+            if collisions.rect_point(macrophage_summoner.get_rect(), mouse.controls['pos']):
+                macrophages.add(M_Basic())
+            elif collisions.rect_point(bacteriophage_summoner.get_rect(), mouse.controls['pos']):
+                bacteriophages.add(B_Basic())
 
         macrophage_summoner.go(window)
         bacteriophage_summoner.go(window)
