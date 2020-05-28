@@ -16,10 +16,7 @@ class Summoner(Button):
         super().__init__(x, y, w, h, name, text_key, None)
 
     def can_summon(self):
-        if self._cooldown_left <= 0:
-            return True
-        else:
-            return False
+        return self._cooldown_left <= 0
 
     def do_summon(self):
         if self.can_summon():

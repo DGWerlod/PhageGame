@@ -67,7 +67,7 @@ def main():
         # Wall(150, 300, 100, constants.MACROPHAGE_SIDE, 2),
         # Wall(250, 300, 100, constants.MACROPHAGE_SIDE, 1)
     ]
-    macrophage_summoner = Summoner(0, 375, 100, 100, constants.MACROPHAGE_SIDE)
+    macrophage_summoner = Summoner(0, constants.GAME_HEIGHT // 4 * 3, 125, 125, constants.MACROPHAGE_SIDE)
 
     bacteriophages = set()
     bacteriophage_base = None  # Base(0, 300, 100, constants.BACTERIOPHAGE_SIDE)
@@ -76,7 +76,8 @@ def main():
         # Wall(150, 300, 100, constants.BACTERIOPHAGE_SIDE, 2),
         # Wall(250, 300, 100, constants.BACTERIOPHAGE_SIDE, 1)
     ]
-    bacteriophage_summoner = Summoner(1075, 375, 100, 100, constants.BACTERIOPHAGE_SIDE)
+    bacteriophage_summoner = Summoner(constants.GAME_WIDTH - 125, constants.GAME_HEIGHT // 4 * 3,
+                                      125, 125, constants.BACTERIOPHAGE_SIDE)
 
     macrophages.add(M_Basic())
     bacteriophages.add(B_Basic())
@@ -92,7 +93,7 @@ def main():
                 if collisions.rect_point(macrophage_summoner.get_rect(), mouse.controls['pos']):
                     macrophage_summoner.do_summon()
                     macrophages.add(M_Basic())
-            elif bacteriophage_summoner.can_summon():
+            if bacteriophage_summoner.can_summon():
                 if collisions.rect_point(bacteriophage_summoner.get_rect(), mouse.controls['pos']):
                     bacteriophage_summoner.do_summon()
                     bacteriophages.add(B_Basic())
