@@ -37,7 +37,7 @@ class Microbe(Entity):
         super().go(display)
 
         if self._current_animation == ATTACK_ANIMATION_KEY:
-            if self._animation_cycle == self._attack_key_frame * self._animation_spd:
+            if self._in_front and self._animation_cycle == self._attack_key_frame * self._animation_spd:
                 self._in_front.apply_damage(self._dmg)
                 # debug printing
                 # noinspection PyProtectedMember
