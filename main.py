@@ -96,12 +96,13 @@ def main():
                 macrophages.remove(in_front)
 
             # here be jankiness
-            # if keyboard.controls['key_w'] and not keyboard.controls['key_s']:
-            #     # noinspection PyProtectedMember
-            #     b._animation_spd = max(1, b._animation_spd - 1)
-            # if keyboard.controls['key_s'] and not keyboard.controls['key_w']:
-            #     # noinspection PyProtectedMember
-            #     b._animation_spd = min(15, b._animation_spd + 1)
+            # cha cha real smooth
+            if keyboard.controls['key_w'] and not keyboard.controls['key_s']:
+                # noinspection PyProtectedMember
+                b._animation_spd = max(1, b._animation_spd - 1)
+            if keyboard.controls['key_s'] and not keyboard.controls['key_w']:
+                # noinspection PyProtectedMember
+                b._animation_spd = min(15, b._animation_spd + 1)
 
         # debugging visuals
         pygame.draw.line(window, (0, 255, 0), (0, constants.GAME_HEIGHT // 4),
