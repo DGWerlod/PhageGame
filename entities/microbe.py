@@ -43,7 +43,7 @@ class Microbe(Entity):
                 # noinspection PyProtectedMember
                 print(self._name + " attacks " + self._in_front._name + " for " + str(self._dmg) +
                       " damage! (" + str(self._in_front._hp) + " hp remaining)")
-            elif self._animation_cycle == 0 and self._animation_looped:
+            elif self._animation_looped:
                 self.change_animation(WALK_ANIMATION_KEY, WALK_ANIMATION_SPEED)
 
         if self._in_front and collisions.rectangles(self.get_rect(), self._in_front.get_rect()):
