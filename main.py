@@ -2,14 +2,15 @@ import pygame
 from pygame.locals import *
 
 import constants
+from entities.buildings.base import Base
+from entities.buildings.wall import Wall
 from logic import collisions
 from controls import keyboard, mouse
 
 from entities.buttons.summoner import Summoner
 from entities.bacteriophages.b_basic import B_Basic
 from entities.macrophages.m_basic import M_Basic
-from dice import dice, critDice
-
+from dice.dice import Dice, Crit_Dice
 
 flags = DOUBLEBUF
 
@@ -32,35 +33,49 @@ def listen():
     return True
 
 
-def get_microbe_in_front(microbes, base_is_at_left):
+def first_in_front_of_second(first, second, base_is_at_left):
+    if second is None:
+        return True
+    first_x = first.get_rect().X
+    second_x = second.get_rect().X
+    rightmost = first_x > second_x and base_is_at_left
+    leftmost = first_x < second_x and not base_is_at_left
+    if leftmost or rightmost:
+        return True
+    return False
+
+
+def get_subject_in_front(microbes, walls, base, base_is_at_left):
     in_front = None
-    in_front_x = 0
+    for w in walls:
+        if first_in_front_of_second(w, in_front, base_is_at_left):
+            in_front = w
     for m in microbes:
-        m_x = m.get_rect().X
-        rightmost = m_x > in_front_x and base_is_at_left
-        leftmost = m_x < in_front_x and not base_is_at_left
-        if in_front is None or leftmost or rightmost:
+        if first_in_front_of_second(m, in_front, base_is_at_left):
             in_front = m
-            in_front_x = m_x
+    # if first_in_front_of_second(base, in_front, base_is_at_left):
+    #     in_front = base
+
     return in_front
 
 
 def main():
-
-    macrophage_side = constants.LEFT
-
     macrophages = set()
-    # macrophage_base = Base(500, 300, 100, constants.MACROPHAGE_SIDE)
-    # macrophage_walls = [Wall(50, 300, 100, constants.MACROPHAGE_SIDE, 3),
-    #                     Wall(150, 300, 100, constants.MACROPHAGE_SIDE, 2),
-    #                     Wall(250, 300, 100, constants.MACROPHAGE_SIDE, 1)]
+    macrophage_base = None  # Base(500, 300, 100, constants.MACROPHAGE_SIDE)
+    macrophage_walls = [
+        # Wall(50, 300, 100, constants.MACROPHAGE_SIDE, 3),
+        # Wall(150, 300, 100, constants.MACROPHAGE_SIDE, 2),
+        # Wall(250, 300, 100, constants.MACROPHAGE_SIDE, 1)
+    ]
     macrophage_summoner = Summoner(0, 375, 100, 100, constants.MACROPHAGE_SIDE)
 
     bacteriophages = set()
-    # bacteriophage_base = Base(0, 300, 100, constants.BACTERIOPHAGE_SIDE)
-    # macrophage_walls = [Wall(50, 300, 100, constants.BACTERIOPHAGE_SIDE, 3),
-    #                     Wall(150, 300, 100, constants.BACTERIOPHAGE_SIDE, 2),
-    #                     Wall(250, 300, 100, constants.BACTERIOPHAGE_SIDE, 1)]
+    bacteriophage_base = None  # Base(0, 300, 100, constants.BACTERIOPHAGE_SIDE)
+    bacteriophage_walls = [
+        # Wall(50, 300, 100, constants.BACTERIOPHAGE_SIDE, 3),
+        # Wall(150, 300, 100, constants.BACTERIOPHAGE_SIDE, 2),
+        # Wall(250, 300, 100, constants.BACTERIOPHAGE_SIDE, 1)
+    ]
     bacteriophage_summoner = Summoner(1075, 375, 100, 100, constants.BACTERIOPHAGE_SIDE)
 
     macrophages.add(M_Basic())
@@ -73,24 +88,28 @@ def main():
         window.fill(constants.BLUE)
 
         if mouse.controls['click']:
-            if macrophage_summoner.can_summon() and collisions.rect_point(macrophage_summoner.get_rect(), mouse.controls['pos']):
-                macrophage_summoner.do_summon()
-                macrophages.add(M_Basic())
-            elif bacteriophage_summoner.can_summon() and collisions.rect_point(bacteriophage_summoner.get_rect(), mouse.controls['pos']):
-                bacteriophage_summoner.do_summon()
-                bacteriophages.add(B_Basic())
+            if macrophage_summoner.can_summon():
+                if collisions.rect_point(macrophage_summoner.get_rect(), mouse.controls['pos']):
+                    macrophage_summoner.do_summon()
+                    macrophages.add(M_Basic())
+            elif bacteriophage_summoner.can_summon():
+                if collisions.rect_point(bacteriophage_summoner.get_rect(), mouse.controls['pos']):
+                    bacteriophage_summoner.do_summon()
+                    bacteriophages.add(B_Basic())
 
         macrophage_summoner.go(window)
         bacteriophage_summoner.go(window)
 
         for m in macrophages:
-            in_front = get_microbe_in_front(bacteriophages, constants.BACTERIOPHAGE_SIDE)
+            in_front = get_subject_in_front(bacteriophages, bacteriophage_walls,
+                                            bacteriophage_base, constants.BACTERIOPHAGE_SIDE)
             m.set_in_front(in_front)
             m.go(window)
             if in_front and not in_front.is_alive():
                 bacteriophages.remove(in_front)
         for b in bacteriophages:
-            in_front = get_microbe_in_front(macrophages, macrophage_side)
+            in_front = get_subject_in_front(macrophages, macrophage_walls,
+                                            macrophage_base, constants.MACROPHAGE_SIDE)
             b.set_in_front(in_front)
             b.go(window)
             if in_front and not in_front.is_alive():

@@ -1,4 +1,4 @@
-from entities.entity import Entity
+from entities.mortal import Mortal
 from logic import collisions
 
 WALK_ANIMATION_KEY = "walk"
@@ -8,22 +8,15 @@ WALK_ANIMATION_SPEED = 5
 ATTACK_ANIMATION_SPEED = 3
 
 
-class Microbe(Entity):
+class Microbe(Mortal):
     def __init__(self, x, y, w, h, spd, hp, dmg, name=None, animation_spd=0, attack_key_frame=0):
-        super().__init__(x, y, w, h, name, WALK_ANIMATION_KEY, animation_spd)
+        super().__init__(x, y, w, h, hp, name, WALK_ANIMATION_KEY, animation_spd)
         self._spd = spd
-        self._hp = hp
         self._dmg = dmg
         self._attack_key_frame = attack_key_frame
         self._in_front = None
         self._cooldown_timer = 30
         self._cooldown_left = 0
-
-    def is_alive(self):
-        return self._hp > 0
-
-    def apply_damage(self, dmg):
-        self._hp -= dmg
 
     def set_in_front(self, in_front):
         self._in_front = in_front
