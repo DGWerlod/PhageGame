@@ -5,8 +5,6 @@ import constants
 from logic import collisions
 from controls import keyboard, mouse
 
-from entities.base import Base
-from entities.wall import Wall
 from entities.buttons.summoner import Summoner
 from entities.bacteriophages.b_basic import B_Basic
 from entities.macrophages.m_basic import M_Basic

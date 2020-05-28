@@ -21,6 +21,7 @@ class Microbe(Entity):
     def set_in_front(self, in_front):
         self._in_front = in_front
 
+    # subclasses MUST override this function
     def pos(self):
         raise Exception("Something isn't right - you shouldn't be seeing this message!")
 
