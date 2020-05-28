@@ -101,29 +101,26 @@ def main():
         macrophage_summoner.go(window)
         bacteriophage_summoner.go(window)
 
+        macrophages_remaining = set()
         for m in macrophages:
             in_front = get_subject_in_front(bacteriophages, bacteriophage_walls,
                                             bacteriophage_base, constants.BACTERIOPHAGE_SIDE)
             m.set_in_front(in_front)
             m.go(window)
-            if in_front and not in_front.is_alive():
-                bacteriophages.remove(in_front)
+            if m.is_alive() and m.get_rect().X < constants.GAME_WIDTH:
+                macrophages_remaining.add(m)
+        macrophages = macrophages_remaining
+
+        bacteriophages_remaining = set()
         for b in bacteriophages:
             in_front = get_subject_in_front(macrophages, macrophage_walls,
                                             macrophage_base, constants.MACROPHAGE_SIDE)
             b.set_in_front(in_front)
             b.go(window)
-            if in_front and not in_front.is_alive():
-                macrophages.remove(in_front)
-
-            # here be jankiness
-            # cha cha real smooth
-            if keyboard.controls['key_w'] and not keyboard.controls['key_s']:
-                # noinspection PyProtectedMember
-                b._animation_spd = max(1, b._animation_spd - 1)
-            if keyboard.controls['key_s'] and not keyboard.controls['key_w']:
-                # noinspection PyProtectedMember
-                b._animation_spd = min(15, b._animation_spd + 1)
+            b_rect = b.get_rect()
+            if b.is_alive() and b_rect.X - b_rect.W > 0:
+                bacteriophages_remaining.add(b)
+        bacteriophages = bacteriophages_remaining
 
         # debugging visuals
         pygame.draw.line(window, (0, 255, 0), (0, constants.GAME_HEIGHT // 4),

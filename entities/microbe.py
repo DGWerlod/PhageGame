@@ -1,3 +1,4 @@
+from controls import keyboard
 from entities.mortal import Mortal
 from logic import collisions
 
@@ -21,6 +22,12 @@ class Microbe(Mortal):
     def set_in_front(self, in_front):
         self._in_front = in_front
 
+    def speed_change_funtime(self):
+        if keyboard.controls['key_w'] and not keyboard.controls['key_s']:
+            self._animation_spd = max(1, self._animation_spd - 1)
+        if keyboard.controls['key_s'] and not keyboard.controls['key_w']:
+            self._animation_spd = min(15, self._animation_spd + 1)
+
     # subclasses MUST override this function
     def pos(self):
         raise Exception("Something isn't right - you shouldn't be seeing this message!")
@@ -28,6 +35,8 @@ class Microbe(Mortal):
     def go(self, display):
 
         super().go(display)
+
+        self.speed_change_funtime()
 
         if self._current_animation == ATTACK_ANIMATION_KEY:
             if self._in_front and self._animation_cycle == self._attack_key_frame * self._animation_spd:
