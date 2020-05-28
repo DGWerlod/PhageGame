@@ -13,14 +13,14 @@ IMAGES = {
             pygame.transform.scale(pygame.image.load("img/buffteriophage/frame8.png"), (125, 125))
         ],
         "attack": [
-            pygame.transform.scale(pygame.image.load("img/buffteriophage/frame1.png"), (125, 125)),
-            pygame.transform.scale(pygame.image.load("img/buffteriophage/frame2.png"), (125, 125)),
-            pygame.transform.scale(pygame.image.load("img/buffteriophage/frame3.png"), (125, 125)),
-            pygame.transform.scale(pygame.image.load("img/buffteriophage/frame4.png"), (125, 125)),
-            pygame.transform.scale(pygame.image.load("img/buffteriophage/frame5.png"), (125, 125)),
-            pygame.transform.scale(pygame.image.load("img/buffteriophage/frame6.png"), (125, 125)),
-            pygame.transform.scale(pygame.image.load("img/buffteriophage/frame7.png"), (125, 125)),
-            pygame.transform.scale(pygame.image.load("img/buffteriophage/frame8.png"), (125, 125))
+            pygame.transform.scale(pygame.image.load("img/buffteriophage/frameA1.png"), (125, 125)),
+            pygame.transform.scale(pygame.image.load("img/buffteriophage/frameA1.png"), (125, 125)),
+            pygame.transform.scale(pygame.image.load("img/buffteriophage/frameA3.png"), (125, 125)),
+            pygame.transform.scale(pygame.image.load("img/buffteriophage/frameA3.png"), (125, 125)),
+            pygame.transform.scale(pygame.image.load("img/buffteriophage/frameA3.png"), (125, 125)),
+            pygame.transform.scale(pygame.image.load("img/buffteriophage/frameA3.png"), (125, 125)),
+            pygame.transform.scale(pygame.image.load("img/buffteriophage/frameA2.png"), (125, 125)),
+            pygame.transform.scale(pygame.image.load("img/buffteriophage/frameA2.png"), (125, 125))
         ],
         "static": [
             pygame.transform.scale(pygame.image.load("img/buffteriophage/frame3.png"), (125, 125))
