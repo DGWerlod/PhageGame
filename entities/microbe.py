@@ -28,6 +28,11 @@ class Microbe(Entity):
     def go(self, display):
         super().go(display)
         if self._in_front and collisions.rectangles(self.get_rect(), self._in_front.get_rect()):
+            if self._cooldown_left <= 2:
+                if self._current_animation != "attack":
+                    self._walk_spd = self._animation_spd
+                self._current_animation = "attack"
+                self._animation_spd = 1
             if self._cooldown_left <= 0:
                 self._in_front.apply_damage(self._dmg)
                 # debug printing
@@ -37,5 +42,8 @@ class Microbe(Entity):
                 self._cooldown_left = self._cooldown_timer
         else:
             self.pos()
+            if self._current_animation != "walk":
+                self._current_animation = "walk"
+                self._animation_spd = self._walk_spd
         if self._cooldown_left > 0:
             self._cooldown_left -= 1
