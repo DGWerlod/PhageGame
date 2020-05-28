@@ -95,6 +95,7 @@ def main():
                 macrophages.remove(in_front)
 
             # here be jankiness
+            # cha cha real smooth
             if keyboard.controls['key_w'] and not keyboard.controls['key_s']:
                 # noinspection PyProtectedMember
                 b._animation_spd = max(1, b._animation_spd - 1)
