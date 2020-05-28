@@ -15,10 +15,6 @@ class Microbe(Entity):
     def is_alive(self):
         return self._hp > 0
 
-    def try_attack(self, target):
-        if self._cooldown_left == 0:
-            target.apply_damage(self._dmg)
-
     def apply_damage(self, dmg):
         self._hp -= dmg
 
@@ -35,7 +31,7 @@ class Microbe(Entity):
                 self._in_front.apply_damage(self._dmg)
                 # debug printing
                 # noinspection PyProtectedMember
-                print(self._name + " attacks " + self._in_front._name + " for " + str(self._dmg) + " damage!\n" +
+                print(self._name + " attacks " + self._in_front._name + " for " + str(self._dmg) + " damage! " +
                       "(" + str(self._in_front._hp) + " hp remaining)")
                 self._cooldown_left = self._cooldown_timer
         else:

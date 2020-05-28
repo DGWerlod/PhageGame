@@ -103,11 +103,11 @@ def main():
                 b._animation_spd = min(15, b._animation_spd + 1)
 
         # debugging visuals
-        pygame.draw.line(window, (0, 255, 0), (0, constants.GAME_HEIGHT / 4),
-                         (constants.GAME_WIDTH, constants.GAME_HEIGHT / 4), 3)
-        pygame.draw.line(window, (0, 255, 0), (0, constants.GAME_HEIGHT/4*3),
-                         (constants.GAME_WIDTH, constants.GAME_HEIGHT/4*3), 3)
-        pygame.draw.rect(window, (255, 0, 255), pygame.Rect(700, constants.GAME_HEIGHT/2, 100, 125))
+        pygame.draw.line(window, (0, 255, 0), (0, constants.GAME_HEIGHT // 4),
+                         (constants.GAME_WIDTH, constants.GAME_HEIGHT // 4), 3)
+        pygame.draw.line(window, (0, 255, 0), (0, constants.GAME_HEIGHT // 4 * 3),
+                         (constants.GAME_WIDTH, constants.GAME_HEIGHT // 4 * 3), 3)
+        pygame.draw.rect(window, (255, 0, 255), pygame.Rect(700, constants.GAME_HEIGHT // 2, 100, 125))
 
         # Update Window
         pygame.display.update()
