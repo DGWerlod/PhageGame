@@ -72,9 +72,11 @@ def main():
         window.fill(constants.BLUE)
 
         if mouse.controls['click']:
-            if collisions.rect_point(macrophage_summoner.get_rect(), mouse.controls['pos']):
+            if macrophage_summoner.can_summon() and collisions.rect_point(macrophage_summoner.get_rect(), mouse.controls['pos']):
+                macrophage_summoner.do_summon()
                 macrophages.add(M_Basic())
-            elif collisions.rect_point(bacteriophage_summoner.get_rect(), mouse.controls['pos']):
+            elif bacteriophage_summoner.can_summon() and collisions.rect_point(bacteriophage_summoner.get_rect(), mouse.controls['pos']):
+                bacteriophage_summoner.do_summon()
                 bacteriophages.add(B_Basic())
 
         macrophage_summoner.go(window)

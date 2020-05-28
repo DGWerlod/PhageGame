@@ -13,10 +13,10 @@ IMAGES = {
             pygame.transform.scale(pygame.image.load("img/buffteriophage/frame8.png"), (125, 125))
         ],
         "attack": [
-            pygame.transform.scale(pygame.image.load("img/buffteriophage/frameS2.png"), (125, 125)),
             pygame.transform.scale(pygame.image.load("img/buffteriophage/frameS3.png"), (125, 125)),
+            pygame.transform.scale(pygame.image.load("img/buffteriophage/frameS2.png"), (125, 125)),
             pygame.transform.scale(pygame.image.load("img/buffteriophage/frameS1.png"), (125, 125)),
-            pygame.transform.scale(pygame.image.load("img/buffteriophage/frameS3.png"), (125, 125))
+            pygame.transform.scale(pygame.image.load("img/buffteriophage/frameS1.png"), (125, 125))
         ],
         "static": [
             pygame.transform.scale(pygame.image.load("img/buffteriophage/frame3.png"), (125, 125))
@@ -48,7 +48,7 @@ IMAGES = {
             pygame.image.load("img/buttons/footbutton.png")
         ],
         "inactive": [
-            pygame.image.load("img/buttons/footbutton.png")
+            pygame.image.load("img/buttons/footbutton-inactive.png")
         ]
     },
     "bacteriophage_summoner": {
@@ -56,7 +56,7 @@ IMAGES = {
             pygame.image.load("img/buttons/buffbutton.png")
         ],
         "inactive": [
-            pygame.image.load("img/buttons/buffbutton.png")
+            pygame.image.load("img/buttons/buffbutton-inactive.png")
         ]
     },
 }
