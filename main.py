@@ -8,7 +8,7 @@ from controls import keyboard, mouse
 from entities.buttons.summoner import Summoner
 from entities.bacteriophages.b_basic import B_Basic
 from entities.macrophages.m_basic import M_Basic
-from dice import dice
+from dice import dice, critDice
 
 
 flags = DOUBLEBUF
