@@ -10,3 +10,4 @@ class dice:
     num = random.ranint(1,self.dicelength,1)
     print("\n%s\nYou rolled a %s " % (self.dicedic[num], str(num)))
     return num
+twenty = dice(1, [], {})
