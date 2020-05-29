@@ -10,7 +10,7 @@ from controls import keyboard, mouse
 from entities.buttons.summoner import Summoner
 from entities.bacteriophages.b_basic import B_Basic
 from entities.macrophages.m_basic import M_Basic
-from dice.dice import Dice, Crit_Dice
+# from dice.dice import Dice, Crit_Dice
 
 flags = DOUBLEBUF
 
@@ -38,11 +38,16 @@ def first_in_front_of_second(first, second, base_is_at_left):
         return True
     first_x = first.get_rect().X
     second_x = second.get_rect().X
-    rightmost = first_x > second_x and base_is_at_left
-    leftmost = first_x < second_x and not base_is_at_left
-    if leftmost or rightmost:
-        return True
-    return False
+    output = False
+    if base_is_at_left:
+        first_w = first.get_rect().W
+        second_w = second.get_rect().W
+        output = first_x + first_w > second_x + second_w
+    elif not base_is_at_left:
+        output = first_x < second_x
+    else:
+        ValueError("Invalid input for parameter base_is_at_left.")
+    return output
 
 
 def get_subject_in_front(microbes, walls, base, base_is_at_left):
@@ -53,28 +58,28 @@ def get_subject_in_front(microbes, walls, base, base_is_at_left):
     for m in microbes:
         if first_in_front_of_second(m, in_front, base_is_at_left):
             in_front = m
-    # if first_in_front_of_second(base, in_front, base_is_at_left):
-    #     in_front = base
+    if first_in_front_of_second(base, in_front, base_is_at_left):
+        in_front = base
 
     return in_front
 
 
 def main():
     macrophages = set()
-    macrophage_base = None  # Base(500, 300, 100, constants.MACROPHAGE_SIDE)
+    macrophage_base = Base(constants.GAME_WIDTH // 2 - 550 - 50, 100, constants.MACROPHAGE_SIDE)
     macrophage_walls = [
-        # Wall(50, 300, 100, constants.MACROPHAGE_SIDE, 3),
-        # Wall(150, 300, 100, constants.MACROPHAGE_SIDE, 2),
-        # Wall(250, 300, 100, constants.MACROPHAGE_SIDE, 1)
+        Wall(constants.GAME_WIDTH // 2 - 400 - 15, 100, constants.MACROPHAGE_SIDE, 3),
+        Wall(constants.GAME_WIDTH // 2 - 275 - 15, 100, constants.MACROPHAGE_SIDE, 2),
+        Wall(constants.GAME_WIDTH // 2 - 150 - 15, 100, constants.MACROPHAGE_SIDE, 1)
     ]
     macrophage_summoner = Summoner(0, constants.GAME_HEIGHT // 4 * 3, 125, 125, constants.MACROPHAGE_SIDE)
 
     bacteriophages = set()
-    bacteriophage_base = None  # Base(0, 300, 100, constants.BACTERIOPHAGE_SIDE)
+    bacteriophage_base = Base(constants.GAME_WIDTH // 2 + 550 - 50, 100, constants.BACTERIOPHAGE_SIDE)
     bacteriophage_walls = [
-        # Wall(50, 300, 100, constants.BACTERIOPHAGE_SIDE, 3),
-        # Wall(150, 300, 100, constants.BACTERIOPHAGE_SIDE, 2),
-        # Wall(250, 300, 100, constants.BACTERIOPHAGE_SIDE, 1)
+        Wall(constants.GAME_WIDTH // 2 + 400 - 15, 100, constants.BACTERIOPHAGE_SIDE, 3),
+        Wall(constants.GAME_WIDTH // 2 + 275 - 15, 100, constants.BACTERIOPHAGE_SIDE, 2),
+        Wall(constants.GAME_WIDTH // 2 + 150 - 15, 100, constants.BACTERIOPHAGE_SIDE, 1)
     ]
     bacteriophage_summoner = Summoner(constants.GAME_WIDTH - 125, constants.GAME_HEIGHT // 4 * 3,
                                       125, 125, constants.BACTERIOPHAGE_SIDE)
@@ -122,12 +127,33 @@ def main():
                 bacteriophages_remaining.add(b)
         bacteriophages = bacteriophages_remaining
 
+        macrophage_walls_remaining = []
+        for m_w in macrophage_walls:
+            if m_w.is_alive():
+                macrophage_walls_remaining.append(m_w)
+                m_w.go(window)
+        macrophage_walls = macrophage_walls_remaining
+
+        bacteriophage_walls_remaining = []
+        for b_w in bacteriophage_walls:
+            if b_w.is_alive():
+                bacteriophage_walls_remaining.append(b_w)
+                b_w.go(window)
+        bacteriophage_walls = bacteriophage_walls_remaining
+
+        if macrophage_base.is_alive():
+            macrophage_base.go(window)
+        if bacteriophage_base.is_alive():
+            bacteriophage_base.go(window)
+
         # debugging visuals
         pygame.draw.line(window, (0, 255, 0), (0, constants.GAME_HEIGHT // 4),
                          (constants.GAME_WIDTH, constants.GAME_HEIGHT // 4), 3)
         pygame.draw.line(window, (0, 255, 0), (0, constants.GAME_HEIGHT // 4 * 3),
                          (constants.GAME_WIDTH, constants.GAME_HEIGHT // 4 * 3), 3)
-        pygame.draw.rect(window, (255, 0, 255), pygame.Rect(700, constants.GAME_HEIGHT // 2, 100, 125))
+        pygame.draw.line(window, constants.YELLOW, (constants.GAME_WIDTH // 2, 0),
+                         (constants.GAME_WIDTH // 2, constants.GAME_HEIGHT), 3)
+        # pygame.draw.rect(window, (255, 0, 255), pygame.Rect(700, constants.GAME_HEIGHT // 2, 100, 125))
 
         # Update Window
         pygame.display.update()
