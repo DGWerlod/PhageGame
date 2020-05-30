@@ -45,7 +45,7 @@ IMAGES = {
             pygame.transform.scale(pygame.image.load("img/macrophoot/frame1.png"), (125, 125))
         ]
     },
-    "macrophage_summoner": {
+    constants.M_BASIC + "_summoner": {
         "active": [
             pygame.image.load("img/buttons/footbutton.png")
         ],
@@ -53,7 +53,7 @@ IMAGES = {
             pygame.image.load("img/buttons/footbutton-inactive.png")
         ]
     },
-    "bacteriophage_summoner": {
+    constants.B_BASIC + "_summoner": {
         "active": [
             pygame.image.load("img/buttons/buffbutton.png")
         ],

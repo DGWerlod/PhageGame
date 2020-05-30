@@ -19,6 +19,9 @@ class Microbe(Mortal):
         self._cooldown_timer = 30
         self._cooldown_left = 0
 
+    def get_unit_id(self):
+        return self._name
+
     def set_in_front(self, in_front):
         self._in_front = in_front
 

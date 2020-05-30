@@ -1,4 +1,3 @@
-import constants
 from entities.buttons.button import Button
 
 
@@ -7,13 +6,11 @@ class Summoner(Button):
         self._cooldown_timer = 30
         self._cooldown_left = 0
         self._unit_ID = unit_id
-        if unit_id == constants.MACROPHAGE_SIDE:
-            name = text_key = "macrophage_summoner"
-        elif unit_id == constants.BACTERIOPHAGE_SIDE:
-            name = text_key = "bacteriophage_summoner"
-        else:
-            raise ValueError("Wrong unit_id passed to Summoner.__init__().")
+        name = text_key = unit_id + "_summoner"
         super().__init__(x, y, w, h, name, text_key, None)
+
+    def get_unit_id(self):
+        return self._unit_ID
 
     def can_summon(self):
         return self._cooldown_left <= 0
@@ -34,5 +31,3 @@ class Summoner(Button):
         super().go(display)
 
         self._cooldown_left = max(0, self._cooldown_left - 1)
-
-
