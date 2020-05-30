@@ -64,28 +64,66 @@ def get_subject_in_front(microbes, walls, base, base_is_at_left):
     return in_front
 
 
+def draw_debug_visuals():
+    pygame.draw.line(window, constants.YELLOW, (0, constants.GAME_HEIGHT // 4),
+                     (constants.GAME_WIDTH, constants.GAME_HEIGHT // 4), 3)
+    pygame.draw.line(window, constants.YELLOW, (0, constants.GAME_HEIGHT // 4 * 3),
+                     (constants.GAME_WIDTH, constants.GAME_HEIGHT // 4 * 3), 3)
+    pygame.draw.line(window, constants.YELLOW, (constants.GAME_WIDTH // 2, 0),
+                     (constants.GAME_WIDTH // 2, constants.GAME_HEIGHT), 3)
+    pygame.draw.rect(window, constants.MAGENTA, pygame.Rect(constants.GAME_WIDTH // 2 - 50,
+                                                            constants.GAME_HEIGHT // 2, 100, 125))
+
+
+def microbe_actions(now, enemies, enemy_walls, enemy_base, enemy_side):
+    now_remaining = set()
+    for n in now:
+        in_front = get_subject_in_front(enemies, enemy_walls, enemy_base, enemy_side)
+        n.set_in_front(in_front)
+        n.go(window)
+        if not enemy_side:  # now are macrophages
+            on_screen = n.get_rect().X < constants.GAME_WIDTH
+        elif enemy_side:  # now are bacteriophages
+            n_rect = n.get_rect()
+            on_screen = n_rect.X + n_rect.W > 0
+        else:
+            raise ValueError("Unrecognized enemy_side.")
+        if n.is_alive() and on_screen:
+            now_remaining.add(n)
+    return now_remaining
+
+
+def wall_actions(walls):
+    walls_remaining = []
+    for w in walls:
+        if w.is_alive():
+            walls_remaining.append(w)
+            w.go(window)
+    return walls_remaining
+
+
 def main():
+
     macrophages = set()
-    macrophage_base = Base(constants.GAME_WIDTH // 2 - 550 - 50, 100, constants.MACROPHAGE_SIDE)
+    macrophages.add(M_Basic())
+    macrophage_base = Base(constants.MACROPHAGE_SIDE)
     macrophage_walls = [
-        Wall(constants.GAME_WIDTH // 2 - 400 - 15, 100, constants.MACROPHAGE_SIDE, 3),
-        Wall(constants.GAME_WIDTH // 2 - 275 - 15, 100, constants.MACROPHAGE_SIDE, 2),
-        Wall(constants.GAME_WIDTH // 2 - 150 - 15, 100, constants.MACROPHAGE_SIDE, 1)
+        Wall(constants.MACROPHAGE_SIDE, 3),
+        Wall(constants.MACROPHAGE_SIDE, 2),
+        Wall(constants.MACROPHAGE_SIDE, 1)
     ]
     macrophage_summoner = Summoner(0, constants.GAME_HEIGHT // 4 * 3, 125, 125, constants.MACROPHAGE_SIDE)
 
     bacteriophages = set()
-    bacteriophage_base = Base(constants.GAME_WIDTH // 2 + 550 - 50, 100, constants.BACTERIOPHAGE_SIDE)
+    bacteriophages.add(B_Basic())
+    bacteriophage_base = Base(constants.BACTERIOPHAGE_SIDE)
     bacteriophage_walls = [
-        Wall(constants.GAME_WIDTH // 2 + 400 - 15, 100, constants.BACTERIOPHAGE_SIDE, 3),
-        Wall(constants.GAME_WIDTH // 2 + 275 - 15, 100, constants.BACTERIOPHAGE_SIDE, 2),
-        Wall(constants.GAME_WIDTH // 2 + 150 - 15, 100, constants.BACTERIOPHAGE_SIDE, 1)
+        Wall(constants.BACTERIOPHAGE_SIDE, 3),
+        Wall(constants.BACTERIOPHAGE_SIDE, 2),
+        Wall(constants.BACTERIOPHAGE_SIDE, 1)
     ]
     bacteriophage_summoner = Summoner(constants.GAME_WIDTH - 125, constants.GAME_HEIGHT // 4 * 3,
                                       125, 125, constants.BACTERIOPHAGE_SIDE)
-
-    macrophages.add(M_Basic())
-    bacteriophages.add(B_Basic())
 
     running = True
 
@@ -106,54 +144,20 @@ def main():
         macrophage_summoner.go(window)
         bacteriophage_summoner.go(window)
 
-        macrophages_remaining = set()
-        for m in macrophages:
-            in_front = get_subject_in_front(bacteriophages, bacteriophage_walls,
-                                            bacteriophage_base, constants.BACTERIOPHAGE_SIDE)
-            m.set_in_front(in_front)
-            m.go(window)
-            if m.is_alive() and m.get_rect().X < constants.GAME_WIDTH:
-                macrophages_remaining.add(m)
-        macrophages = macrophages_remaining
-
-        bacteriophages_remaining = set()
-        for b in bacteriophages:
-            in_front = get_subject_in_front(macrophages, macrophage_walls,
-                                            macrophage_base, constants.MACROPHAGE_SIDE)
-            b.set_in_front(in_front)
-            b.go(window)
-            b_rect = b.get_rect()
-            if b.is_alive() and b_rect.X - b_rect.W > 0:
-                bacteriophages_remaining.add(b)
-        bacteriophages = bacteriophages_remaining
-
-        macrophage_walls_remaining = []
-        for m_w in macrophage_walls:
-            if m_w.is_alive():
-                macrophage_walls_remaining.append(m_w)
-                m_w.go(window)
-        macrophage_walls = macrophage_walls_remaining
-
-        bacteriophage_walls_remaining = []
-        for b_w in bacteriophage_walls:
-            if b_w.is_alive():
-                bacteriophage_walls_remaining.append(b_w)
-                b_w.go(window)
-        bacteriophage_walls = bacteriophage_walls_remaining
-
         if macrophage_base.is_alive():
             macrophage_base.go(window)
         if bacteriophage_base.is_alive():
             bacteriophage_base.go(window)
 
-        # debugging visuals
-        pygame.draw.line(window, (0, 255, 0), (0, constants.GAME_HEIGHT // 4),
-                         (constants.GAME_WIDTH, constants.GAME_HEIGHT // 4), 3)
-        pygame.draw.line(window, (0, 255, 0), (0, constants.GAME_HEIGHT // 4 * 3),
-                         (constants.GAME_WIDTH, constants.GAME_HEIGHT // 4 * 3), 3)
-        pygame.draw.line(window, constants.YELLOW, (constants.GAME_WIDTH // 2, 0),
-                         (constants.GAME_WIDTH // 2, constants.GAME_HEIGHT), 3)
-        # pygame.draw.rect(window, (255, 0, 255), pygame.Rect(700, constants.GAME_HEIGHT // 2, 100, 125))
+        macrophage_walls = wall_actions(macrophage_walls)
+        bacteriophage_walls = wall_actions(bacteriophage_walls)
+
+        macrophages = microbe_actions(macrophages, bacteriophages, bacteriophage_walls,
+                                      bacteriophage_base, constants.BACTERIOPHAGE_SIDE)
+        bacteriophages = microbe_actions(bacteriophages, macrophages, macrophage_walls,
+                                         macrophage_base, constants.MACROPHAGE_SIDE)
+
+        draw_debug_visuals()
 
         # Update Window
         pygame.display.update()
