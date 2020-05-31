@@ -63,22 +63,22 @@ IMAGES = {
     },
     "macrophage_wall": {
         "static": [
-            pygame.transform.scale(pygame.image.load("img/test/chrissyc.png"), (30, constants.GAME_HEIGHT // 8 * 3))
+            pygame.transform.scale(pygame.image.load("img/walls/cellswall.png"), (90, constants.GAME_HEIGHT // 8 * 3))
         ]
     },
     "bacteriophage_wall": {
         "static": [
-            pygame.transform.scale(pygame.image.load("img/test/simpleplayer.png"), (30, constants.GAME_HEIGHT // 8 * 3))
+            pygame.transform.scale(pygame.image.load("img/walls/viralwall.png"), (90, constants.GAME_HEIGHT // 8 * 3))
         ]
     },
     "macrophage_base": {
         "static": [
-            pygame.transform.scale(pygame.image.load("img/test/chrissyc.png"), (100, constants.GAME_HEIGHT // 2))
+            pygame.transform.scale(pygame.image.load("img/walls/foottower.png"), (100, constants.GAME_HEIGHT // 2))
         ]
     },
     "bacteriophage_base": {
         "static": [
-            pygame.transform.scale(pygame.image.load("img/test/simpleplayer.png"), (100, constants.GAME_HEIGHT // 2))
+            pygame.transform.scale(pygame.image.load("img/walls/handbase.png"), (100, constants.GAME_HEIGHT // 2))
         ]
     },
 }

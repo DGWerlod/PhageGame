@@ -1,7 +1,7 @@
 import constants
 from entities.mortal import Mortal
 
-WIDTH = 30
+WIDTH = 80
 Y_LOCATION = HEIGHT = constants.GAME_HEIGHT // 8 * 3
 
 TIER_OFFSETS = [
