@@ -2,9 +2,11 @@ import pygame
 
 pygame.init()
 
-controls = {'pos': pygame.mouse.get_pos(),
-            'click': False,
-            'held': False}
+controls = {
+    'pos': pygame.mouse.get_pos(),
+    'click': False,
+    'held': False
+}
 
 
 def listen():
@@ -18,3 +20,5 @@ def listen():
     elif not info[0]:
         controls['click'] = False
         controls['held'] = False
+    else:
+        raise AssertionError("Something went wrong in mouse.py.")

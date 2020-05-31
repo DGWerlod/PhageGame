@@ -2,6 +2,7 @@ import pygame
 from pygame.locals import *
 
 import constants
+from fonts import text
 from controls import keyboard, mouse
 # from dice.dice import Dice, Crit_Dice
 
@@ -43,14 +44,18 @@ def main():
 
     current_level = Level_One()
     # current_level_number = 1
-    game_state = constants.GAMEPLAY
+    game_state = constants.AUTHORS
 
     running = True
 
     while running:
 
         if game_state == constants.AUTHORS:
-            pass
+            window.fill(constants.BLACK)
+            for t in text.STATE_ZERO_TEXT:
+                window.blit(text.RENDERED_TEXT[t][0], text.RENDERED_TEXT[t][1])
+            if keyboard.controls['pressed']['key_enter']:
+                game_state = constants.GAMEPLAY
         elif game_state == constants.SPLASH:
             pass
         elif game_state == constants.LEVEL_SELECT:

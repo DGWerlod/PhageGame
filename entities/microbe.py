@@ -26,9 +26,9 @@ class Microbe(Mortal):
         self._in_front = in_front
 
     def speed_change_funtime(self):
-        if keyboard.controls['key_w'] and not keyboard.controls['key_s']:
+        if keyboard.controls['held']['key_w'] and not keyboard.controls['held']['key_s']:
             self._animation_spd = max(1, self._animation_spd - 1)
-        if keyboard.controls['key_s'] and not keyboard.controls['key_w']:
+        if keyboard.controls['held']['key_s'] and not keyboard.controls['held']['key_w']:
             self._animation_spd = min(15, self._animation_spd + 1)
 
     # subclasses MUST override this function
