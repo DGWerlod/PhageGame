@@ -24,7 +24,7 @@ def _first_in_front_of_second(first, second, base_is_at_left):
     return output
 
 
-def _get_subject_in_front(microbes, walls, base, base_is_at_left):
+def _get_mortal_in_front(microbes, walls, base, base_is_at_left):
     in_front = None
     for w in walls:
         if _first_in_front_of_second(w, in_front, base_is_at_left):
@@ -40,7 +40,7 @@ def _get_subject_in_front(microbes, walls, base, base_is_at_left):
 def _microbe_actions(window, now, enemies, enemy_walls, enemy_base, enemy_side):
     now_remaining = set()
     for n in now:
-        in_front = _get_subject_in_front(enemies, enemy_walls, enemy_base, enemy_side)
+        in_front = _get_mortal_in_front(enemies, enemy_walls, enemy_base, enemy_side)
         n.set_in_front(in_front)
         n.go(window)
         if not enemy_side:  # now are macrophages

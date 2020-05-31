@@ -1,7 +1,3 @@
-import pygame
-
-pygame.font.init()
-
 # GENERAL VARIABLES
 GAME_WIDTH, GAME_HEIGHT = 1200, 500
 
@@ -18,12 +14,6 @@ BLUE = (0, 0, 255)
 GREEN = (0, 255, 0)
 YELLOW = (255, 255, 0)
 MAGENTA = (255, 0, 255)
-
-# FONTS
-SOURCE, SIZES = "fonts/muli.ttf", [15, 20, 30, 70]
-MULI = {}
-for s in SIZES:
-    MULI[str(s)] = pygame.font.Font(SOURCE, s)
 
 # SIDES
 LEFT = MACROPHAGE_SIDE = True
