@@ -7,6 +7,8 @@ HEIGHT = constants.GAME_HEIGHT // 2
 
 OFFSET = 550
 
+HEALTH_BAR_HEIGHT = -10
+
 
 class Base(Mortal):
     def __init__(self, allegiance, hp=100):
@@ -19,5 +21,5 @@ class Base(Mortal):
             name = "bacteriophage_base"
         else:
             raise ValueError("Wrong allegiance passed to Base.__init__().")
-        super().__init__(x_location, Y_LOCATION, WIDTH, HEIGHT, hp, name, "static")
+        super().__init__(x_location, Y_LOCATION, WIDTH, HEIGHT, hp, HEALTH_BAR_HEIGHT, name, "static")
         self._allegiance = allegiance

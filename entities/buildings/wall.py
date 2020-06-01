@@ -4,6 +4,8 @@ from entities.mortal import Mortal
 WIDTH = 90
 Y_LOCATION = HEIGHT = constants.GAME_HEIGHT // 8 * 3
 
+HEALTH_BAR_HEIGHT = 5
+
 TIER_OFFSETS = [
     None,  # no such thing as tier zero!
     150,
@@ -23,6 +25,6 @@ class Wall(Mortal):
             name = "bacteriophage_wall"
         else:
             raise ValueError("Wrong allegiance passed to Wall.__init__().")
-        super().__init__(x_location, Y_LOCATION, WIDTH, HEIGHT, hp, name, "static")
+        super().__init__(x_location, Y_LOCATION, WIDTH, HEIGHT, hp, HEALTH_BAR_HEIGHT, name, "static")
         self._allegiance = allegiance
         self._tier_number = tier_number
