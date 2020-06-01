@@ -14,7 +14,7 @@ for s in _sizes:
 _created_by = MULI[70].render("Created by", True, constants.WHITE)
 _authors = MULI[30].render("Daniel DeAnda | Desmond Kamas | Kaweees", True, constants.WHITE)
 _created_with = MULI[70].render("Created with", True, constants.WHITE)
-_tools = MULI[30].render("Python | Pygame | Pycharm | VS Code | GitHub | Love", True, constants.WHITE)
+_tools = MULI[30].render("Python | Pygame | PyInstaller | Pycharm | VS Code | GitHub | Love", True, constants.WHITE)
 _begin = MULI[30].render("Press Enter", True, constants.GREY)
 
 RENDERED_TEXT = {
