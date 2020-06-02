@@ -8,8 +8,8 @@ files = [
     "../entities/macrophages/m_basic.py", "../entities/bacteriophages/b_basic.py",
     "../entities/buttons/button.py", "../entities/buttons/system.py", "../entities/buttons/upgrade.py",
     "../entities/buttons/summoner.py",
-    "../fonts/text.py", "../img/images.py",
-    "../levels/level.py", "../levels/level_one.py",
+    "../fonts/text.py", "../img/images.py", "../sound/sounds.py",
+    "../levels/level.py", "../levels/level_builder.py", "../levels/level_one.py",
     "../logic/collisions.py", "../logic/graphics.py", "../logic/rect.py", "../logic/circle.py"
 ]
 
