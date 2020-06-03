@@ -76,7 +76,7 @@ def _summoner_actions(window, summoners, microbes):
 class Level(object):
     def __init__(self, macrophages_available, macrophage_walls, macrophage_base,
                  bacteriophages_available, bacteriophage_walls, bacteriophage_base,
-                 upgrades_enabled=None):
+                 upgrades_enabled=None, background=None):
 
         self._macrophages = set()
         self._macrophages_available = macrophages_available
@@ -90,6 +90,8 @@ class Level(object):
         self._bacteriophage_base = bacteriophage_base
         self._bacteriophage_summoners = []
 
+        self._background = background
+
         self._upgrades_enabled = upgrades_enabled
 
         x_loc = 0
@@ -102,6 +104,11 @@ class Level(object):
             x_loc -= 125
 
     def go(self, window):
+        if self._background:
+            window.blit(self._background, (0, 0))
+        else:
+            window.fill(constants.BLUE)
+
         _summoner_actions(window, self._macrophage_summoners, self._macrophages)
         _summoner_actions(window, self._bacteriophage_summoners, self._bacteriophages)
 

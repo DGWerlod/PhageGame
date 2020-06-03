@@ -63,7 +63,6 @@ def main():
         elif game_state == constants.UPGRADES:
             pass
         elif game_state == constants.GAMEPLAY:
-            window.fill(constants.BLUE)
             current_level.go(window)
             draw_debug_visuals()
         elif game_state == constants.PAUSE:

@@ -2,6 +2,7 @@ import constants
 from entities.buildings.base import Base
 from entities.buildings.wall import Wall
 from levels.level import Level
+from img.images import IMAGES
 
 
 class Level_One(Level):
@@ -23,4 +24,6 @@ class Level_One(Level):
                          ],
                          Base(constants.BACTERIOPHAGE_SIDE),
 
-                         None)
+                         None,
+                         
+                         IMAGES["level"]["background"][0])

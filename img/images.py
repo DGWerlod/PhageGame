@@ -81,4 +81,9 @@ IMAGES = {
             pygame.transform.scale(pygame.image.load("img/walls/handbase.png"), (100, constants.GAME_HEIGHT // 2))
         ]
     },
+    "level": {
+        "background": [
+            pygame.transform.scale(pygame.image.load("img/levels/bloodbackground.png"), (constants.GAME_WIDTH, constants.GAME_HEIGHT))
+        ]
+    }
 }
