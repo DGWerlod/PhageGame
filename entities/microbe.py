@@ -8,10 +8,12 @@ ATTACK_ANIMATION_KEY = "attack"
 WALK_ANIMATION_SPEED = 5
 ATTACK_ANIMATION_SPEED = 3
 
+HEALTH_BAR_HEIGHT = 5
+
 
 class Microbe(Mortal):
     def __init__(self, x, y, w, h, spd, hp, dmg, name=None, animation_spd=0, attack_key_frame=0):
-        super().__init__(x, y, w, h, hp, name, WALK_ANIMATION_KEY, animation_spd)
+        super().__init__(x, y, w, h, hp, HEALTH_BAR_HEIGHT, name, WALK_ANIMATION_KEY, animation_spd)
         self._spd = spd
         self._dmg = dmg
         self._attack_key_frame = attack_key_frame

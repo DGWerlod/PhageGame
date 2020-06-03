@@ -33,17 +33,16 @@ controls = {
 }
 
 
+def new_frame():
+    for key in controls['pressed']:
+        controls['pressed'][key] = False
+
+
 def listen(event):
     if event.type == pygame.KEYDOWN:
         if event.key in presets:
-            if not controls['held'][presets[event.key]]:
-                controls['pressed'][presets[event.key]] = True
-                controls['held'][presets[event.key]] = True
-            elif controls['held'][presets[event.key]]:
-                controls['pressed'][presets[event.key]] = False
-            else:
-                raise AssertionError("Something went wrong in keyboard.py.")
+            controls['pressed'][presets[event.key]] = True
+            controls['held'][presets[event.key]] = True
     elif event.type == pygame.KEYUP:
         if event.key in presets:
-            controls['pressed'][presets[event.key]] = False
             controls['held'][presets[event.key]] = False
