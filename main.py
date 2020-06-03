@@ -51,7 +51,6 @@ def main():
     current_level = None
 
     sounds.start_music()
-    sounds.change_music(20)
 
     while running:
 

@@ -2,7 +2,7 @@ import pygame
 pygame.mixer.init()
 
 splash_shift_time = 12.852 + 0.3  # seconds
-overture_loop_time = 25.652  # seconds
+overture_loop_time = 25.650  # seconds
 END_FLAG = pygame.USEREVENT + 1  # ensures that this flag != any preset one
 
 pygame.mixer.music.load("sound/overture.ogg")
