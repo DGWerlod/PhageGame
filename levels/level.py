@@ -2,7 +2,7 @@ import constants
 from controls import mouse
 from entities.buttons.summoner import Summoner
 from entities.microbe_builder import build_microbe
-from logic import collisions
+from logic import collisions, graphics
 
 POSSIBLE_UPGRADES = set()
 
@@ -96,18 +96,20 @@ class Level(object):
 
         x_loc = 0
         for m in macrophages_available:
-            self._macrophage_summoners.append(Summoner(x_loc, constants.HUD_BOTTOM_Y, 125, 125, m))
+            new = Summoner(x_loc, constants.WINDOW_HEIGHT - constants.HUD_HEIGHT, 125, 125, m)
+            self._macrophage_summoners.append(new)
             x_loc += 125
         x_loc = constants.GAME_WIDTH - 125
         for b in bacteriophages_available:
-            self._bacteriophage_summoners.append(Summoner(x_loc, constants.HUD_BOTTOM_Y, 125, 125, b))
+            new = Summoner(x_loc, constants.WINDOW_HEIGHT - constants.HUD_HEIGHT, 125, 125, b)
+            self._bacteriophage_summoners.append(new)
             x_loc -= 125
 
     def go(self, window):
         if self._background:
-            window.blit(self._background, (0, 0))
+            window.blit(self._background, (0, constants.HUD_HEIGHT))
         else:
-            window.fill(constants.BLUE)
+            graphics.fill_game_rect(window, constants.BLUE)
 
         _summoner_actions(window, self._macrophage_summoners, self._macrophages)
         _summoner_actions(window, self._bacteriophage_summoners, self._bacteriophages)

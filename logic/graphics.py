@@ -5,13 +5,13 @@
 """
 Rounded rectangles in both non-antialiased and antialiased varieties.
 """
-
 import pygame as pg
-
 from pygame import gfxdraw
+from pygame.rect import Rect
+
+import constants
 
 
-# noinspection PyArgumentList
 def round_rect(surface, rect, color, rad=20, border=0, inside=(0, 0, 0, 0)):
     """
     Draw a rect with rounded corners to surface.  Argument rad can be specified
@@ -23,6 +23,7 @@ def round_rect(surface, rect, color, rad=20, border=0, inside=(0, 0, 0, 0)):
     rect = pg.Rect(rect)
     zeroed_rect = rect.copy()
     zeroed_rect.topleft = 0, 0
+    # noinspection PyArgumentList
     image = pg.Surface(rect.size).convert_alpha()
     image.fill((0, 0, 0, 0))
     _render_region(image, zeroed_rect, color, rad)
@@ -63,3 +64,10 @@ def _aa_render_region(image, rect, color, rad):
         gfxdraw.filled_circle(image, x, y, rad, color)
     image.fill(color, rect.inflate(-2 * rad, 0))
     image.fill(color, rect.inflate(0, -2 * rad))
+
+
+# The code below was not taken from the internet and was instead written by Daniel DeAnda.
+
+
+def fill_game_rect(window, color):
+    pg.draw.rect(window, color, Rect(0, constants.HUD_HEIGHT, constants.GAME_WIDTH, constants.GAME_HEIGHT))

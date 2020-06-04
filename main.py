@@ -3,6 +3,7 @@ from pygame.locals import *
 
 import constants
 from fonts import text
+from logic import graphics
 from sound import sounds
 from controls import keyboard, mouse
 # from dice.dice import Dice, Crit_Dice
@@ -13,7 +14,7 @@ flags = DOUBLEBUF
 
 pygame.init()
 
-window = pygame.display.set_mode((constants.GAME_WIDTH, constants.GAME_HEIGHT), flags)
+window = pygame.display.set_mode((constants.WINDOW_WIDTH, constants.WINDOW_HEIGHT), flags)
 window.set_alpha(None)
 pygame.display.set_caption("PhageGame")
 pygame.mouse.set_cursor(*pygame.cursors.diamond)
@@ -34,14 +35,14 @@ def listen():
 
 
 def draw_debug_visuals():
-    pygame.draw.line(window, constants.BLACK, (0, constants.HUD_TOP_END_Y),
-                     (constants.GAME_WIDTH, constants.HUD_TOP_END_Y), 3)
-    pygame.draw.line(window, constants.BLACK, (0, constants.HUD_BOTTOM_Y),
-                     (constants.GAME_WIDTH, constants.HUD_BOTTOM_Y), 3)
-    pygame.draw.line(window, constants.YELLOW, (constants.GAME_WIDTH // 2, 0),
-                     (constants.GAME_WIDTH // 2, constants.GAME_HEIGHT), 3)
+    pygame.draw.line(window, constants.BLACK, (0, constants.HUD_HEIGHT),
+                     (constants.GAME_WIDTH, constants.HUD_HEIGHT), 3)
+    pygame.draw.line(window, constants.BLACK, (0, constants.WINDOW_HEIGHT - constants.HUD_HEIGHT),
+                     (constants.GAME_WIDTH, constants.WINDOW_HEIGHT - constants.HUD_HEIGHT), 3)
+    pygame.draw.line(window, constants.YELLOW, (constants.CENTER_X, constants.HUD_HEIGHT),
+                     (constants.CENTER_X, constants.HUD_HEIGHT + constants.GAME_HEIGHT), 3)
     pygame.draw.rect(window, constants.MAGENTA,
-                     pygame.Rect(constants.GAME_WIDTH // 2 - 50, constants.GAME_HEIGHT // 2, 100, 125))
+                     pygame.Rect(constants.CENTER_X - 50, constants.CENTER_Y, 100, 125))
 
 
 def main():
@@ -54,9 +55,11 @@ def main():
 
     while running:
 
+        window.fill(constants.GREY)
+
         if game_state == constants.AUTHORS:
 
-            window.fill(constants.BLACK)
+            graphics.fill_game_rect(window, constants.BLACK)
             for t in text.STATE_AUTHORS_TEXT:
                 window.blit(text.RENDERED_TEXT[t][0], text.RENDERED_TEXT[t][1])
             if keyboard.controls['pressed']['key_enter']:
@@ -66,7 +69,7 @@ def main():
 
         elif game_state == constants.SPLASH:
 
-            window.fill(constants.BLACK)
+            graphics.fill_game_rect(window, constants.BLACK)
             for t in text.STATE_SPLASH_TEXT:
                 window.blit(text.RENDERED_TEXT[t][0], text.RENDERED_TEXT[t][1])
             if keyboard.controls['pressed']['key_enter']:
@@ -102,9 +105,13 @@ def main():
         else:
             raise ValueError("Invalid game state!")
 
-        # Debug
-        fps = text.MULI[15].render(str(round(clock.get_fps(), 1)), True, constants.WHITE)
-        window.blit(fps, (constants.GAME_WIDTH - 40, 5))
+        if constants.SHOW_DEBUG:
+            fps = text.MULI[15].render(str(round(clock.get_fps(), 1)), True, constants.WHITE)
+            if game_state < constants.GAMEPLAY:
+                fps_height = 0
+            else:
+                fps_height = constants.HUD_HEIGHT
+            window.blit(fps, (constants.GAME_WIDTH - 40, fps_height + 5))
 
         # Update Window
         pygame.display.update()

@@ -1,7 +1,7 @@
 import constants
 from entities.mortal import Mortal
 
-Y_LOCATION = constants.GAME_HEIGHT // 4
+Y_LOCATION = constants.HUD_HEIGHT + constants.GAME_HEIGHT // 4
 WIDTH = 100
 HEIGHT = constants.GAME_HEIGHT // 2
 

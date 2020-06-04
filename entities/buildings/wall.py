@@ -2,7 +2,8 @@ import constants
 from entities.mortal import Mortal
 
 WIDTH = 90
-Y_LOCATION = HEIGHT = constants.GAME_HEIGHT // 8 * 3
+HEIGHT = constants.GAME_HEIGHT // 8 * 3
+Y_LOCATION = constants.HUD_HEIGHT + HEIGHT
 
 HEALTH_BAR_OFFSET = 5
 
