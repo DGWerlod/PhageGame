@@ -50,7 +50,7 @@ def main():
     game_state = constants.AUTHORS
     current_level = None
 
-    sounds.start_music()
+    # sounds.start_music()
 
     while running:
 
@@ -84,7 +84,8 @@ def main():
 
         elif game_state == constants.GAMEPLAY:
             current_level.go(window)
-            draw_debug_visuals()
+            if constants.SHOW_DEBUG:
+                draw_debug_visuals()
 
         elif game_state == constants.PAUSE:
 
