@@ -96,13 +96,11 @@ class Level(object):
 
         x_loc = 0
         for m in macrophages_available:
-            new = Summoner(x_loc, constants.WINDOW_HEIGHT - constants.HUD_HEIGHT, 125, 125, m)
-            self._macrophage_summoners.append(new)
+            self._macrophage_summoners.append(Summoner(x_loc, constants.BOTTOM_HUD, 125, 125, m))
             x_loc += 125
         x_loc = constants.GAME_WIDTH - 125
         for b in bacteriophages_available:
-            new = Summoner(x_loc, constants.WINDOW_HEIGHT - constants.HUD_HEIGHT, 125, 125, b)
-            self._bacteriophage_summoners.append(new)
+            self._bacteriophage_summoners.append(Summoner(x_loc, constants.BOTTOM_HUD, 125, 125, b))
             x_loc -= 125
 
     def go(self, window):

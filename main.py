@@ -37,8 +37,8 @@ def listen():
 def draw_debug_visuals():
     pygame.draw.line(window, constants.BLACK, (0, constants.HUD_HEIGHT),
                      (constants.GAME_WIDTH, constants.HUD_HEIGHT), 3)
-    pygame.draw.line(window, constants.BLACK, (0, constants.WINDOW_HEIGHT - constants.HUD_HEIGHT),
-                     (constants.GAME_WIDTH, constants.WINDOW_HEIGHT - constants.HUD_HEIGHT), 3)
+    pygame.draw.line(window, constants.BLACK, (0, constants.BOTTOM_HUD),
+                     (constants.GAME_WIDTH, constants.BOTTOM_HUD), 3)
     pygame.draw.line(window, constants.YELLOW, (constants.CENTER_X, constants.HUD_HEIGHT),
                      (constants.CENTER_X, constants.HUD_HEIGHT + constants.GAME_HEIGHT), 3)
     pygame.draw.rect(window, constants.MAGENTA,
