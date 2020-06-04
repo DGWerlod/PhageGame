@@ -1,3 +1,5 @@
+from random import randint
+
 import constants
 from controls import keyboard
 from entities.mortal import Mortal
@@ -9,12 +11,15 @@ ATTACK_ANIMATION_KEY = "attack"
 WALK_ANIMATION_SPEED = 5
 ATTACK_ANIMATION_SPEED = 3
 
-HEALTH_BAR_OFFSET = 5
+HEALTH_BAR_OFFSET = 15
+HEALTH_BAR_VARIANCE = 15
 
 
 class Microbe(Mortal):
     def __init__(self, x, y, w, h, spd, hp, dmg, name=None, animation_spd=0, attack_key_frame=0):
-        super().__init__(x, y, w, h, hp, HEALTH_BAR_OFFSET, name, WALK_ANIMATION_KEY, animation_spd)
+        # makes stacked health bars easier to see
+        true_health_bar_offset = HEALTH_BAR_OFFSET + randint(0, HEALTH_BAR_VARIANCE)
+        super().__init__(x, y, w, h, hp, true_health_bar_offset, name, WALK_ANIMATION_KEY, animation_spd)
         self._spd = spd
         self._dmg = dmg
         self._attack_key_frame = attack_key_frame

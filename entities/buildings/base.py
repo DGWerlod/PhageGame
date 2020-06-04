@@ -7,7 +7,7 @@ HEIGHT = constants.GAME_HEIGHT // 2
 
 OFFSET = 550
 
-HEALTH_BAR_OFFSET = -10
+HEALTH_BAR_OFFSET = 15
 
 
 class Base(Mortal):

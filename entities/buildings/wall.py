@@ -5,7 +5,7 @@ WIDTH = 90
 HEIGHT = constants.GAME_HEIGHT // 8 * 3
 Y_LOCATION = constants.HUD_HEIGHT + HEIGHT
 
-HEALTH_BAR_OFFSET = 5
+HEALTH_BAR_OFFSET = 15
 
 TIER_OFFSETS = [
     None,  # no such thing as tier zero!

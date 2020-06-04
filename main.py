@@ -51,7 +51,7 @@ def main():
     game_state = constants.AUTHORS
     current_level = None
 
-    # sounds.start_music()
+    sounds.start_music()
 
     while running:
 
