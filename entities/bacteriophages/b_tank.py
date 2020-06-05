@@ -8,8 +8,10 @@ class B_Tank(Bacteriophage):
                          125, 125, 5, 200, 10, constants.B_TANK, 2, 2)
 
     def pos(self):
-        if self._animation_cycle == 3:
+        # current frame to be displayed is the floor of this value divided by _animation_spd
+        cur_frame = self._animation_cycle // self._animation_spd
+        if cur_frame == 2:
             self._x -= self._spd * 3
-        if self._animation_cycle == 4:
+        if cur_frame == 3:
             self._x -= self._spd * 2
         
