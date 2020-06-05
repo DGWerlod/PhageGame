@@ -35,4 +35,4 @@ B_BASIC = "buffteriophage"
 B_TANK = "tankphage"
 
 # DEBUG
-SHOW_DEBUG = False
+SHOW_DEBUG = True

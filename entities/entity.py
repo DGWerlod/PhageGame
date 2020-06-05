@@ -17,6 +17,9 @@ class Entity(object):
     def get_rect(self):
         return Rect(self._x, self._y, self._w, self._h)
 
+    def get_name(self):
+        return self._name
+
     def change_animation(self, new_animation_key, new_animation_spd=None):
         self._current_animation = new_animation_key
         self._animation_cycle = 0

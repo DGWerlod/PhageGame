@@ -64,26 +64,26 @@ IMAGES = {
     },
     constants.M_BASIC + "_summoner": {
         "active": [
-            pygame.image.load("img/buttons/footbutton.png")
+            pygame.image.load("img/buttons/summoners/footbutton.png")
         ],
         "inactive": [
-            pygame.image.load("img/buttons/footbutton-inactive.png")
+            pygame.image.load("img/buttons/summoners/footbutton-inactive.png")
         ]
     },
     constants.B_BASIC + "_summoner": {
         "active": [
-            pygame.image.load("img/buttons/buffbutton.png")
+            pygame.image.load("img/buttons/summoners/buffbutton.png")
         ],
         "inactive": [
-            pygame.image.load("img/buttons/buffbutton-inactive.png")
+            pygame.image.load("img/buttons/summoners/buffbutton-inactive.png")
         ]
     },
     constants.B_TANK + "_summoner": {
         "active": [
-            pygame.image.load("img/buttons/tankbutton.png")
+            pygame.image.load("img/buttons/summoners/tankbutton.png")
         ],
         "inactive": [
-            pygame.image.load("img/buttons/tankbutton-inactive.png")
+            pygame.image.load("img/buttons/summoners/tankbutton-inactive.png")
         ]
     },
     "macrophage_wall": {
@@ -110,6 +110,27 @@ IMAGES = {
         "background": [
             pygame.transform.scale(pygame.image.load("img/levels/bloodbackground.png"),
                                    (constants.GAME_WIDTH, constants.GAME_HEIGHT))
+        ]
+    },
+    "action": {
+        "pause": [
+            pygame.transform.scale(pygame.image.load("img/buttons/system/pause.png"), (125, 125))
+        ],
+        "play": [
+            pygame.transform.scale(pygame.image.load("img/buttons/system/play.png"), (125, 125))
+        ]
+    },
+    "music": {
+        "audible": [
+            pygame.transform.scale(pygame.image.load("img/buttons/system/audible.png"), (125, 125))
+        ],
+        "muted": [
+            pygame.transform.scale(pygame.image.load("img/buttons/system/muted.png"), (125, 125))
+        ]
+    },
+    "back": {
+        "back": [
+            pygame.transform.scale(pygame.image.load("img/buttons/system/back.png"), (125, 125))
         ]
     }
 }

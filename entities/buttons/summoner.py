@@ -6,8 +6,8 @@ class Summoner(Button):
         self._cooldown_timer = 30
         self._cooldown_left = 0
         self._unit_ID = unit_id
-        name = text_key = unit_id + "_summoner"
-        super().__init__(x, y, w, h, name, text_key, None)
+        name = unit_id + "_summoner"
+        super().__init__(x, y, w, h, name)
 
     def get_unit_id(self):
         return self._unit_ID
