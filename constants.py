@@ -29,6 +29,9 @@ PAUSE = 5
 VICTORY = 6
 DEFEAT = 7
 
+# LEVEL INFO
+NUM_LEVELS = 1  # natural maximum is 28
+
 # UNIT IDS
 M_BASIC = "macrophoot"
 B_BASIC = "buffteriophage"
