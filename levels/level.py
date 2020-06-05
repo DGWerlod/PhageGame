@@ -103,6 +103,14 @@ class Level(object):
             self._bacteriophage_summoners.append(Summoner(x_loc, constants.BOTTOM_HUD, 125, 125, b))
             x_loc -= 125
 
+    # 1 is a victory, -1 is defeat, 0 is neither
+    def check_winner(self):
+        if not self._bacteriophage_base.is_alive():
+            return 1
+        if not self._macrophage_base.is_alive():
+            return -1
+        return 0
+
     def go(self, window):
         if self._background:
             window.blit(self._background, (0, constants.HUD_HEIGHT))

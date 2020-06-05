@@ -35,11 +35,14 @@ def listen():
     return True
 
 
-def draw_debug_visuals():
+def draw_hud_dividing_lines():
     pygame.draw.line(window, constants.BLACK, (0, constants.HUD_HEIGHT),
                      (constants.GAME_WIDTH, constants.HUD_HEIGHT), 3)
     pygame.draw.line(window, constants.BLACK, (0, constants.BOTTOM_HUD),
                      (constants.GAME_WIDTH, constants.BOTTOM_HUD), 3)
+
+
+def draw_debug_visuals():
     pygame.draw.line(window, constants.YELLOW, (constants.CENTER_X, constants.HUD_HEIGHT),
                      (constants.CENTER_X, constants.HUD_HEIGHT + constants.GAME_HEIGHT), 3)
     pygame.draw.rect(window, constants.MAGENTA,
@@ -102,8 +105,15 @@ def main():
         elif game_state == constants.GAMEPLAY:
 
             current_level.go(window)
+            draw_hud_dividing_lines()
             if constants.SHOW_DEBUG:
                 draw_debug_visuals()
+
+            win_state = current_level.check_winner()
+            if win_state > 0:
+                game_state = constants.VICTORY
+            elif win_state < 0:
+                game_state = constants.DEFEAT
 
         elif game_state == constants.PAUSE:
 
@@ -112,11 +122,19 @@ def main():
 
         elif game_state == constants.VICTORY:
 
-            pass
+            graphics.fill_game_rect(window, constants.BLACK)
+            window.blit(text.RENDERED_TEXT["victory"][0], text.RENDERED_TEXT["victory"][1])
+            window.blit(text.RENDERED_TEXT["continue"][0], text.RENDERED_TEXT["continue"][1])
+            if keyboard.controls['pressed']['key_enter']:
+                game_state = constants.LEVEL_SELECT
 
         elif game_state == constants.DEFEAT:
 
-            pass
+            graphics.fill_game_rect(window, constants.BLACK)
+            window.blit(text.RENDERED_TEXT["defeat"][0], text.RENDERED_TEXT["defeat"][1])
+            window.blit(text.RENDERED_TEXT["continue"][0], text.RENDERED_TEXT["continue"][1])
+            if keyboard.controls['pressed']['key_enter']:
+                game_state = constants.LEVEL_SELECT
 
         else:
             raise ValueError("Invalid game state!")
