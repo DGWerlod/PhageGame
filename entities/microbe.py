@@ -7,9 +7,11 @@ from logic import collisions
 
 WALK_ANIMATION_KEY = "walk"
 ATTACK_ANIMATION_KEY = "attack"
+STATIC_ANIMATION_KEY = "static"
 
 WALK_ANIMATION_SPEED = 5
 ATTACK_ANIMATION_SPEED = 3
+STATIC_ANIMATION_SPEED = 1  # Does not matter
 
 HEALTH_BAR_OFFSET = 15
 HEALTH_BAR_VARIANCE = 15
@@ -63,7 +65,11 @@ class Microbe(Mortal):
             if self._cooldown_left <= 0:
                 self.change_animation(ATTACK_ANIMATION_KEY, ATTACK_ANIMATION_SPEED)
                 self._cooldown_left = self._cooldown_timer
+            elif self._current_animation == WALK_ANIMATION_KEY:
+                self.change_animation(STATIC_ANIMATION_KEY, STATIC_ANIMATION_SPEED)
         else:
+            if self._current_animation != WALK_ANIMATION_KEY:
+                self.change_animation(WALK_ANIMATION_KEY, WALK_ANIMATION_SPEED)
             self.pos()
 
         if self._cooldown_left > 0:

@@ -32,6 +32,7 @@ DEFEAT = 7
 # UNIT IDS
 M_BASIC = "macrophoot"
 B_BASIC = "buffteriophage"
+B_TANK = "tankphage"
 
 # DEBUG
 SHOW_DEBUG = False
