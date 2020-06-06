@@ -15,7 +15,7 @@ Download the game by clicking "Clone or Download" and then "Download ZIP."  Unzi
 
 ### Without Python and on Windows
 
-1. Open the `dist` folder, then open the `PhageGame` folder.
+1. Unzip `dist-v_._.zip`, open it, and then open the `PhageGame` folder inside of it.
 2. Run `PhageGame.exe`.
 
 ### If "Without Python" goes wrong...
