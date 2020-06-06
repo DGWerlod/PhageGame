@@ -36,6 +36,7 @@ NUM_LEVELS = 1  # natural maximum is 28
 M_BASIC = "macrophoot"
 B_BASIC = "buffteriophage"
 B_TANK = "tankphage"
+M_BEACH = "macrobeach"
 
 # DEBUG
 SHOW_DEBUG = True

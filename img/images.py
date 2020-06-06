@@ -62,6 +62,27 @@ IMAGES = {
             pygame.transform.scale(pygame.image.load("img/macrophoot/frame1.png"), (125, 125))
         ]
     },
+    "macrobeach": {
+        "walk": [
+            pygame.transform.scale(pygame.image.load("img/macrobeach/frame1.png"), (125, 125)),
+            pygame.transform.scale(pygame.image.load("img/macrobeach/frame2.png"), (125, 125)),
+            pygame.transform.scale(pygame.image.load("img/macrobeach/frame3.png"), (125, 125)),
+            pygame.transform.scale(pygame.image.load("img/macrobeach/frame4.png"), (125, 125)),
+            pygame.transform.scale(pygame.image.load("img/macrobeach/frame5.png"), (125, 125)),
+            pygame.transform.scale(pygame.image.load("img/macrobeach/frame6.png"), (125, 125)),
+            pygame.transform.scale(pygame.image.load("img/macrobeach/frame7.png"), (125, 125)),
+            pygame.transform.scale(pygame.image.load("img/macrobeach/frame8.png"), (125, 125))
+        ],
+        "attack": [
+            pygame.transform.scale(pygame.image.load("img/macrobeach/frameA1.png"), (125, 125)),
+            pygame.transform.scale(pygame.image.load("img/macrobeach/frameA2.png"), (125, 125)),
+            pygame.transform.scale(pygame.image.load("img/macrobeach/frameA3.png"), (125, 125)),
+            pygame.transform.scale(pygame.image.load("img/macrobeach/frameA3.png"), (125, 125))
+        ],
+        "static": [
+            pygame.transform.scale(pygame.image.load("img/macrobeach/frame1.png"), (125, 125))
+        ]
+    },
     constants.M_BASIC + "_summoner": {
         "active": [
             pygame.image.load("img/buttons/summoners/footbutton.png")
@@ -84,6 +105,14 @@ IMAGES = {
         ],
         "inactive": [
             pygame.image.load("img/buttons/summoners/tankbutton-inactive.png")
+        ]
+    },
+    constants.M_BEACH + "_summoner": {
+        "active": [
+            pygame.image.load("img/buttons/beachbutton.png")
+        ],
+        "inactive": [
+            pygame.image.load("img/buttons/beachbutton-inactive.png")
         ]
     },
     "macrophage_wall": {
