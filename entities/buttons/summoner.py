@@ -1,3 +1,7 @@
+import pygame
+from pygame.rect import Rect
+
+import constants
 from entities.buttons.button import Button
 
 
@@ -29,5 +33,7 @@ class Summoner(Button):
             self._current_animation = "inactive"
         
         super().go(display)
+
+        pygame.draw.rect(display, constants.BLACK, Rect(self._x, self._y, self._w, self._h), 2)
 
         self._cooldown_left = max(0, self._cooldown_left - 1)

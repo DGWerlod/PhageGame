@@ -39,4 +39,4 @@ B_TANK = "tankphage"
 M_BEACH = "macrobeach"
 
 # DEBUG
-SHOW_DEBUG = True
+SHOW_DEBUG = False
