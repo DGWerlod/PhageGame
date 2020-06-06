@@ -109,10 +109,10 @@ IMAGES = {
     },
     constants.M_BEACH + "_summoner": {
         "active": [
-            pygame.image.load("img/buttons/beachbutton.png")
+            pygame.image.load("img/buttons/summoners/beachbutton.png")
         ],
         "inactive": [
-            pygame.image.load("img/buttons/beachbutton-inactive.png")
+            pygame.image.load("img/buttons/summoners/beachbutton-inactive.png")
         ]
     },
     "macrophage_wall": {
