@@ -5,6 +5,7 @@ import constants
 from entities.buttons.level_selector import Level_Selector
 from entities.buttons.system import System
 from fonts import text
+from img.images import IMAGES
 from logic import graphics, collisions
 from sound import sounds
 from controls import keyboard, mouse
@@ -95,11 +96,11 @@ def main():
 
         elif game_state == constants.SPLASH:
 
-            window.blit(pygame.transform.scale(pygame.image.load("img/splash.png"), (1200,750)), (0,0))
+            window.blit(IMAGES["splash"]["splash"][0], (0, 0))
 
-            #graphics.fill_game_rect(window, constants.BLACK)
-            #for t in text.STATE_SPLASH_TEXT:
-            #    window.blit(text.RENDERED_TEXT[t][0], text.RENDERED_TEXT[t][1])
+            # graphics.fill_game_rect(window, constants.BLACK)
+            # for t in text.STATE_SPLASH_TEXT:
+            #     window.blit(text.RENDERED_TEXT[t][0], text.RENDERED_TEXT[t][1])
             
             if keyboard.controls['pressed']['key_enter']:
                 game_state = constants.LEVEL_SELECT

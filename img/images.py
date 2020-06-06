@@ -161,5 +161,10 @@ IMAGES = {
         "back": [
             pygame.transform.scale(pygame.image.load("img/buttons/system/back.png"), (125, 125))
         ]
+    },
+    "splash": {
+        "splash": [
+            pygame.transform.scale(pygame.image.load("img/splash.png"), (1200, 750))
+        ]
     }
 }
