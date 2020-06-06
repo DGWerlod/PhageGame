@@ -95,9 +95,12 @@ def main():
 
         elif game_state == constants.SPLASH:
 
-            graphics.fill_game_rect(window, constants.BLACK)
-            for t in text.STATE_SPLASH_TEXT:
-                window.blit(text.RENDERED_TEXT[t][0], text.RENDERED_TEXT[t][1])
+            window.blit(pygame.transform.scale(pygame.image.load("img/splash.png"), (1200,750)), (0,0))
+
+            #graphics.fill_game_rect(window, constants.BLACK)
+            #for t in text.STATE_SPLASH_TEXT:
+            #    window.blit(text.RENDERED_TEXT[t][0], text.RENDERED_TEXT[t][1])
+            
             if keyboard.controls['pressed']['key_enter']:
                 game_state = constants.LEVEL_SELECT
 
