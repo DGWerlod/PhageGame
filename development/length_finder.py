@@ -1,16 +1,20 @@
 files = [
     "../constants.py", "../main.py",
     "../controls/keyboard.py", "../controls/mouse.py",
-    "../entities/entity.py", "../entities/microbe.py", "../entities/hud.py",
-    "../entities/mortal.py", "../entities/health_bar.py", "../entities/microbe_builder.py",
+    "../entities/entity.py", "../entities/health_bar.py", "../entities/hud.py",
+    "../entities/mortal.py", "../entities/projectile.py",
     "../entities/buildings/base.py", "../entities/buildings/wall.py",
-    "../entities/macrophages/macrophage.py", "../entities/bacteriophages/bacteriophage.py",
-    "../entities/macrophages/m_basic.py", "../entities/bacteriophages/b_basic.py",
-    "../entities/buttons/button.py", "../entities/buttons/system.py", "../entities/buttons/upgrade.py",
-    "../entities/buttons/summoner.py", "../entities/buttons/level_selector.py",
-    "../fonts/text.py", "../img/images.py", "../sound/sounds.py",
+    "../entities/buttons/button.py", "../entities/buttons/level_selector.py", "../entities/buttons/summoner.py",
+    "../entities/buttons/system.py", "../entities/buttons/upgrade.py",
+    "../entities/microbes/microbe.py", "../entities/microbes/microbe_builder.py",
+    "../entities/microbes/bacteriophages/b_basic.py", "../entities/microbes/bacteriophages/b_pult.py",
+    "../entities/microbes/bacteriophages/b_tank.py", "../entities/microbes/bacteriophages/bacteriophage.py",
+    "../entities/microbes/macrophages/m_basic.py", "../entities/microbes/macrophages/m_beach.py",
+    "../entities/microbes/macrophages/macrophage.py",
+    "../fonts/text.py", "../img/images.py",
     "../levels/level.py", "../levels/level_builder.py", "../levels/level_one.py",
-    "../logic/collisions.py", "../logic/graphics.py", "../logic/rect.py", "../logic/circle.py"
+    "../logic/circle.py", "../logic/collisions.py", "../logic/dice.py", "../logic/graphics.py", "../logic/circle.py",
+    "../sound/sounds.py"
 ]
 
 

@@ -1,12 +1,12 @@
 import constants
 from entities.microbes.bacteriophages.bacteriophage import Bacteriophage
 from entities.projectile import Projectile
-from dice.dice import Crit_Dice
-from logic.rect import Rect
+from logic.dice import D20
+
 
 class B_Pult(Bacteriophage):
 
-    DIE = Crit_Dice()
+    DIE = D20()
 
     def __init__(self):
         super().__init__(constants.GAME_WIDTH - 125, constants.CENTER_Y,
