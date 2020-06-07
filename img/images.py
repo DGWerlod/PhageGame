@@ -150,7 +150,7 @@ IMAGES = {
     },
     constants.B_PULT + "_projectile": {
         "fly": [
-            pygame.transform.scale(pygame.image.load("img/buffteriopult/frameprojectile.png"), (50,50))
+            pygame.transform.scale(pygame.image.load("img/buffteriopult/frameprojectile.png"), (50, 50))
         ]
     },
     "macrophage_wall": {

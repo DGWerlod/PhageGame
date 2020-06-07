@@ -2,6 +2,7 @@ import constants
 from controls import mouse
 from entities.buttons.summoner import Summoner
 from entities.microbes.microbe_builder import build_microbe
+from img.images import IMAGES
 from logic import collisions, graphics, positions
 
 MICROBES = 0
@@ -60,9 +61,10 @@ def _projectile_actions(window, projectiles, macrophage_mortals, bacteriophage_m
 
 
 class Level(object):
-    def __init__(self, macrophages_available, macrophage_walls, macrophage_base,
+    def __init__(self, number,
+                 macrophages_available, macrophage_walls, macrophage_base,
                  bacteriophages_available, bacteriophage_walls, bacteriophage_base,
-                 background=None, upgrades_enabled=None):
+                 upgrades_enabled=None):
 
         self._macrophage_mortals = [
             set(),  # microbes
@@ -80,7 +82,7 @@ class Level(object):
 
         self._projectiles = set()
 
-        self._background = background
+        self._number = number
 
         self._upgrades_enabled = upgrades_enabled
 
@@ -102,8 +104,9 @@ class Level(object):
         return 0
 
     def go(self, window):
-        if self._background:
-            window.blit(self._background, (0, constants.HUD_HEIGHT))
+
+        if self._number - 1 < len(IMAGES["level"]["background"]):
+            window.blit(IMAGES["level"]["background"][self._number - 1], (0, constants.HUD_HEIGHT))
         else:
             graphics.fill_game_rect(window, constants.BLUE)
 
