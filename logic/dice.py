@@ -5,7 +5,7 @@ import constants
 class Die(object):
     def __init__(self, sides=6):
         self.sides = sides  # how many number the dice will have
-        self.list = range(0, self.list, 1)  # a list with all of the dice numbers
+        self.list = range(0, self.sides, 1)  # a list with all of the dice numbers
 
     def roll(self):
         # print("Rolling...")
