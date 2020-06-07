@@ -4,6 +4,7 @@ import constants
 from controls import keyboard
 from entities.mortal import Mortal
 from logic import collisions
+from logic.rect import Rect
 
 WALK_ANIMATION_KEY = "walk"
 ATTACK_ANIMATION_KEY = "attack"
@@ -50,6 +51,10 @@ class Microbe(Mortal):
         else:
             raise Exception("Something isn't right - you shouldn't be seeing this message!")
 
+    # subclasses that use projectiles may override this function
+    def get_range_rect(self):
+        return Rect(self._x + self._w*2*(1 if self.get_allegiance() else -1), self._y, self._w, self._h)
+
     def check_projectile(self):
         if self._projectile_queued:
             self._projectile_queued = False
@@ -77,7 +82,8 @@ class Microbe(Mortal):
             elif self._animation_looped:
                 self.change_animation(WALK_ANIMATION_KEY, WALK_ANIMATION_SPEED)
 
-        if self._in_front and collisions.rectangles(self.get_rect(), self._in_front.get_rect()):
+        if self._dmg and self._in_front and collisions.rectangles(self.get_rect(), self._in_front.get_rect()) or \
+           not self._dmg and self._in_front and collisions.rectangles(self.get_range_rect(), self._in_front.get_rect()):
             if self._cooldown_left <= 0:
                 self.change_animation(ATTACK_ANIMATION_KEY, ATTACK_ANIMATION_SPEED)
                 self._cooldown_left = self._cooldown_timer

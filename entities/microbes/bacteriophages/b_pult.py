@@ -2,6 +2,7 @@ import constants
 from entities.microbes.bacteriophages.bacteriophage import Bacteriophage
 from entities.projectile import Projectile
 from dice.dice import Crit_Dice
+from logic.rect import Rect
 
 class B_Pult(Bacteriophage):
 
@@ -12,4 +13,4 @@ class B_Pult(Bacteriophage):
                          125, 125, 7, 100, 0, constants.B_PULT, 1, 2)
 
     def make_projectile(self):
-        return Projectile(self._x, self._y, 50, 50, 1, B_Pult.DIE.roll(), self)
+        return Projectile(self._x, self._y, 50, 50, 40, B_Pult.DIE.roll(), self)
