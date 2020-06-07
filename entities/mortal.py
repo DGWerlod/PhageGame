@@ -1,3 +1,4 @@
+import constants
 from entities.entity import Entity
 from entities.health_bar import Health_Bar
 
@@ -21,6 +22,8 @@ class Mortal(Entity):
 
     def apply_damage(self, dmg):
         self._hp -= dmg
+        if constants.SHOW_DEBUG:
+            print(self._name + "is hit for " + dmg + " damage! (" + str(self._hp) + " hp remaining)")
 
     def go(self, display):
         super().go(display)
