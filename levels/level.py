@@ -151,11 +151,6 @@ class Level(object):
         _summoner_actions(window, self._macrophage_summoners, self._macrophages)
         _summoner_actions(window, self._bacteriophage_summoners, self._bacteriophages)
 
-        self._projectiles = _projectile_actions(window, self._projectiles, self._macrophages,
-                                                self._macrophage_walls, self._macrophage_base,
-                                                self._bacteriophages, self._bacteriophage_walls,
-                                                self._bacteriophage_base)
-
         if self._macrophage_base.is_alive():
             self._macrophage_base.go(window)
         if self._bacteriophage_base.is_alive():
@@ -170,3 +165,8 @@ class Level(object):
         self._bacteriophages = _microbe_actions(window, self._bacteriophages, self._projectiles,
                                                 self._macrophages, self._macrophage_walls,
                                                 self._macrophage_base, constants.MACROPHAGE_SIDE)
+
+        self._projectiles = _projectile_actions(window, self._projectiles, self._macrophages,
+                                                self._macrophage_walls, self._macrophage_base,
+                                                self._bacteriophages, self._bacteriophage_walls,
+                                                self._bacteriophage_base)
