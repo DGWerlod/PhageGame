@@ -5,6 +5,7 @@ from entities.microbes.bacteriophages.b_tank import B_Tank
 from entities.microbes.macrophages.m_beach import M_Beach
 from entities.microbes.bacteriophages.b_pult import B_Pult
 
+
 def build_microbe(name):
     if name == constants.M_BASIC:
         return M_Basic()

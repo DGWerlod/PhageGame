@@ -3,8 +3,8 @@ from entities.microbes.microbe import Microbe
 
 
 class Bacteriophage(Microbe):
-    def __init__(self, x, y, w, h, spd, hp, dmg, name=None, animation_spd=0, attack_key_frame=0):
-        super().__init__(x, y, w, h, spd, hp, dmg, name, animation_spd, attack_key_frame)
+    def __init__(self, x, y, w, h, name=None, animation_spd=0, attack_key_frame=0):
+        super().__init__(x, y, w, h, name, animation_spd, attack_key_frame)
 
     def get_allegiance(self):
         return constants.BACTERIOPHAGE_SIDE

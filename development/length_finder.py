@@ -1,5 +1,5 @@
 files = [
-    "../constants.py", "../main.py",
+    "../properties.py", "../constants.py", "../main.py",
     "../controls/keyboard.py", "../controls/mouse.py",
     "../entities/entity.py", "../entities/health_bar.py", "../entities/hud.py",
     "../entities/mortal.py", "../entities/projectile.py",

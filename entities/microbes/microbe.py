@@ -1,6 +1,7 @@
 from random import randint
 
 import constants
+import properties
 from controls import keyboard
 from entities.mortal import Mortal
 from logic import collisions
@@ -19,10 +20,16 @@ HEALTH_BAR_VARIANCE = 15
 
 
 class Microbe(Mortal):
-    def __init__(self, x, y, w, h, spd, hp, dmg, name=None, animation_spd=0, attack_key_frame=0):
+    def __init__(self, x, y, w, h, name=None, animation_spd=0, attack_key_frame=0):
+
+        spd = properties.microbe_speeds[name]
+        hp = properties.microbe_hit_points[name]
+        dmg = properties.microbe_damages[name]
+
         # makes stacked health bars easier to see
         true_health_bar_offset = HEALTH_BAR_OFFSET + randint(0, HEALTH_BAR_VARIANCE)
         super().__init__(x, y, w, h, hp, true_health_bar_offset, name, WALK_ANIMATION_KEY, animation_spd)
+
         self._spd = spd
         self._dmg = dmg  # if damage is zero, throws projectiles instead
         self._attack_key_frame = attack_key_frame

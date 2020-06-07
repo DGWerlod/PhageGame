@@ -32,7 +32,7 @@ DEFEAT = 7
 # LEVEL INFO
 NUM_LEVELS = 1  # natural maximum is 28
 
-# UNIT IDS
+# UNIT NAMES
 M_BASIC = "macrophoot"
 B_BASIC = "buffteriophage"
 B_TANK = "tankphage"
@@ -40,4 +40,4 @@ M_BEACH = "macrobeach"
 B_PULT = "buffteriopult"
 
 # DEBUG
-SHOW_DEBUG = True
+SHOW_DEBUG = False

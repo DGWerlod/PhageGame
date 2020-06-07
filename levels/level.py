@@ -38,7 +38,7 @@ def _summoner_actions(window, summoners, microbes):
         if mouse.controls['click'] and s.can_summon():
             if collisions.rect_point(s.get_rect(), mouse.controls['pos']):
                 s.do_summon()
-                microbes.add(build_microbe(s.get_name()))
+                microbes.add(build_microbe(s.get_unit_name()))
         s.go(window)
 
 
