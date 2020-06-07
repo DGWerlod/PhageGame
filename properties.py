@@ -37,3 +37,13 @@ summoner_cooldowns = {
     constants.M_BASIC: 33,
     constants.M_BEACH: 50
 }
+
+wall_hit_points = {
+    constants.MACROPHAGE_SIDE: 100,
+    constants.BACTERIOPHAGE_SIDE: 100
+}
+
+base_hit_points = {
+    constants.MACROPHAGE_SIDE: 150,
+    constants.BACTERIOPHAGE_SIDE: 150
+}

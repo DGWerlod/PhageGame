@@ -1,6 +1,6 @@
 import constants
 from entities.buildings.base import Base
-from entities.buildings.wall import Wall
+from entities.buildings.wall import get_walls
 from levels.level import Level
 
 
@@ -14,11 +14,7 @@ class Level_One(Level):
                 constants.M_BASIC,
                 constants.M_BEACH
             ],
-            [
-                Wall(constants.MACROPHAGE_SIDE, 3),
-                Wall(constants.MACROPHAGE_SIDE, 2),
-                Wall(constants.MACROPHAGE_SIDE, 1)
-            ],
+            get_walls(constants.MACROPHAGE_SIDE),
             Base(constants.MACROPHAGE_SIDE),
 
             [
@@ -26,11 +22,7 @@ class Level_One(Level):
                 constants.B_PULT,
                 constants.B_TANK
             ],
-            [
-                Wall(constants.BACTERIOPHAGE_SIDE, 3),
-                Wall(constants.BACTERIOPHAGE_SIDE, 2),
-                Wall(constants.BACTERIOPHAGE_SIDE, 1)
-            ],
+            get_walls(constants.BACTERIOPHAGE_SIDE),
             Base(constants.BACTERIOPHAGE_SIDE)
 
         )

@@ -1,4 +1,5 @@
 import constants
+import properties
 from entities.mortal import Mortal
 
 WIDTH = 90
@@ -15,8 +16,16 @@ TIER_OFFSETS = [
 ]
 
 
+def get_walls(allegiance):
+    return [
+        Wall(allegiance, 3),
+        Wall(allegiance, 2),
+        Wall(allegiance, 1)
+    ]
+
+
 class Wall(Mortal):
-    def __init__(self, allegiance, tier_number, hp=100):
+    def __init__(self, allegiance, tier_number):
         x_location = constants.GAME_WIDTH // 2 - WIDTH // 2
         if allegiance == constants.MACROPHAGE_SIDE:
             x_location -= TIER_OFFSETS[tier_number]
@@ -26,6 +35,7 @@ class Wall(Mortal):
             name = "bacteriophage_wall"
         else:
             raise ValueError("Wrong allegiance passed to Wall.__init__().")
+        hp = properties.wall_hit_points[allegiance]
         super().__init__(x_location, Y_LOCATION, WIDTH, HEIGHT, hp, HEALTH_BAR_OFFSET, name, "static")
         self._allegiance = allegiance
         self._tier_number = tier_number

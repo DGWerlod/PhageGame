@@ -85,8 +85,9 @@ class Microbe(Mortal):
             elif self._animation_looped:
                 self.change_animation(WALK_ANIMATION_KEY, WALK_ANIMATION_SPEED)
 
-        if self._dmg and self._in_front and collisions.rectangles(self.get_rect(), self._in_front.get_rect()) or \
-           not self._dmg and self._in_front and collisions.rectangles(self.get_range_rect(), self._in_front.get_rect()):
+        target_rect = self._in_front.get_rect()
+        if self._dmg and self._in_front and collisions.rectangles(self.get_rect(), target_rect) or \
+           not self._dmg and self._in_front and collisions.rectangles(self.get_range_rect(), target_rect):
             if self._cooldown_left <= 0:
                 self.change_animation(ATTACK_ANIMATION_KEY, ATTACK_ANIMATION_SPEED)
                 self._cooldown_left = self._cooldown_timer
