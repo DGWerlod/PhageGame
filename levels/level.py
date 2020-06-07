@@ -1,7 +1,7 @@
 import constants
 from controls import mouse
 from entities.buttons.summoner import Summoner
-from entities.microbe_builder import build_microbe
+from entities.microbes.microbe_builder import build_microbe
 from logic import collisions, graphics
 
 POSSIBLE_UPGRADES = set()
@@ -37,7 +37,7 @@ def _get_mortal_in_front(microbes, walls, base, base_is_at_left):
     return in_front
 
 
-def _microbe_actions(window, now, enemies, enemy_walls, enemy_base, enemy_side):
+def _microbe_actions(window, now, projectiles, enemies, enemy_walls, enemy_base, enemy_side):
     now_remaining = set()
     for n in now:
         in_front = _get_mortal_in_front(enemies, enemy_walls, enemy_base, enemy_side)
@@ -52,6 +52,9 @@ def _microbe_actions(window, now, enemies, enemy_walls, enemy_base, enemy_side):
             raise ValueError("Unrecognized enemy_side.")
         if n.is_alive() and on_screen:
             now_remaining.add(n)
+        projectile = n.check_projectile()
+        if projectile is not None:
+            projectiles.add(projectile)
     return now_remaining
 
 
@@ -69,14 +72,40 @@ def _summoner_actions(window, summoners, microbes):
         if mouse.controls['click'] and s.can_summon():
             if collisions.rect_point(s.get_rect(), mouse.controls['pos']):
                 s.do_summon()
-                microbes.add(build_microbe(s.get_unit_id()))
+                microbes.add(build_microbe(s.get_name()))
         s.go(window)
+
+
+def _projectile_actions(window, projectiles,
+                        macrophages, macrophage_walls, macrophage_base,
+                        bacteriophages, bacteriophage_walls, bacteriophage_base):
+    projectiles_remaining = set()
+    for p in projectiles:
+        allegiance = p.get_allegiance()
+        if p.get_allegiance() == constants.MACROPHAGE_SIDE:
+            in_front = _get_mortal_in_front(bacteriophages, bacteriophage_walls,
+                                            bacteriophage_base, constants.BACTERIOPHAGE_SIDE)
+        elif p.get_allegiance() == constants.BACTERIOPHAGE_SIDE:
+            in_front = _get_mortal_in_front(macrophages, macrophage_walls,
+                                            macrophage_base, constants.MACROPHAGE_SIDE)
+        else:
+            raise AssertionError("Wrong allegiance retrieved from Projectile.get_allegiance()")
+        p.set_in_front(in_front)
+        p.go(window)
+        if allegiance:  # p is a macrophage projectile
+            on_screen = p.get_rect().X < constants.GAME_WIDTH
+        else:  # p is a bacteriophage projectile
+            p_rect = p.get_rect()
+            on_screen = p_rect.X + p_rect.W > 0
+        if p.is_alive() and on_screen:
+            projectiles_remaining.add(p)
+    return projectiles_remaining
 
 
 class Level(object):
     def __init__(self, macrophages_available, macrophage_walls, macrophage_base,
                  bacteriophages_available, bacteriophage_walls, bacteriophage_base,
-                 upgrades_enabled=None, background=None):
+                 background=None, upgrades_enabled=None):
 
         self._macrophages = set()
         self._macrophages_available = macrophages_available
@@ -89,6 +118,8 @@ class Level(object):
         self._bacteriophage_walls = bacteriophage_walls
         self._bacteriophage_base = bacteriophage_base
         self._bacteriophage_summoners = []
+
+        self._projectiles = set()
 
         self._background = background
 
@@ -120,6 +151,11 @@ class Level(object):
         _summoner_actions(window, self._macrophage_summoners, self._macrophages)
         _summoner_actions(window, self._bacteriophage_summoners, self._bacteriophages)
 
+        self._projectiles = _projectile_actions(window, self._projectiles, self._macrophages,
+                                                self._macrophage_walls, self._macrophage_base,
+                                                self._bacteriophages, self._bacteriophage_walls,
+                                                self._bacteriophage_base)
+
         if self._macrophage_base.is_alive():
             self._macrophage_base.go(window)
         if self._bacteriophage_base.is_alive():
@@ -128,9 +164,9 @@ class Level(object):
         self._macrophage_walls = _wall_actions(window, self._macrophage_walls)
         self._bacteriophage_walls = _wall_actions(window, self._bacteriophage_walls)
 
-        self._macrophages = _microbe_actions(window, self._macrophages, self._bacteriophages,
-                                             self._bacteriophage_walls, self._bacteriophage_base,
-                                             constants.BACTERIOPHAGE_SIDE)
-        self._bacteriophages = _microbe_actions(window, self._bacteriophages, self._macrophages,
-                                                self._macrophage_walls, self._macrophage_base,
-                                                constants.MACROPHAGE_SIDE)
+        self._macrophages = _microbe_actions(window, self._macrophages, self._projectiles,
+                                             self._bacteriophages, self._bacteriophage_walls,
+                                             self._bacteriophage_base, constants.BACTERIOPHAGE_SIDE)
+        self._bacteriophages = _microbe_actions(window, self._bacteriophages, self._projectiles,
+                                                self._macrophages, self._macrophage_walls,
+                                                self._macrophage_base, constants.MACROPHAGE_SIDE)

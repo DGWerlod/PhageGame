@@ -29,7 +29,5 @@ class Level_One(Level):
                              Wall(constants.BACTERIOPHAGE_SIDE, 1)
                          ],
                          Base(constants.BACTERIOPHAGE_SIDE),
-
-                         None,
                          
                          IMAGES["level"]["background"][0])
