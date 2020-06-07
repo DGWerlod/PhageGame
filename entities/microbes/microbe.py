@@ -29,8 +29,9 @@ class Microbe(Mortal):
         self._cooldown_timer = 30
         self._cooldown_left = 0
 
-    def get_unit_id(self):
-        return self._name
+    # subclasses MUST override this function
+    def get_allegiance(self):
+        raise Exception("Something isn't right - you shouldn't be seeing this message!")
 
     def set_in_front(self, in_front):
         self._in_front = in_front
@@ -40,6 +41,10 @@ class Microbe(Mortal):
             self._animation_spd = max(1, self._animation_spd - 1)
         if keyboard.controls['held']['key_s'] and not keyboard.controls['held']['key_w']:
             self._animation_spd = min(15, self._animation_spd + 1)
+
+    # noinspection PyMethodMayBeStatic
+    def check_projectile(self):
+        return None  # subclasses may throw projectiles
 
     # subclasses MUST override this function
     def pos(self):

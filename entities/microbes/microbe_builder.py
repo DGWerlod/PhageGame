@@ -15,6 +15,6 @@ def build_microbe(name):
     elif name == constants.M_BEACH:
         return M_Beach()
     elif name == constants.B_PULT:
-        return 
+        return B_Pult()
     else:
         raise ValueError("Invalid Unit ID passed to factory build_microbe()")

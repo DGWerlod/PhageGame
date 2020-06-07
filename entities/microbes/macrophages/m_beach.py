@@ -1,5 +1,5 @@
 import constants
-from entities.macrophages.macrophage import Macrophage
+from entities.microbes.macrophages.macrophage import Macrophage
 
 
 class M_Beach(Macrophage):

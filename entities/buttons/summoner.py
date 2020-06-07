@@ -13,7 +13,7 @@ class Summoner(Button):
         name = unit_id + "_summoner"
         super().__init__(x, y, w, h, name)
 
-    def get_unit_id(self):
+    def get_name(self):
         return self._unit_ID
 
     def can_summon(self):

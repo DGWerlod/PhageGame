@@ -2,11 +2,10 @@ import pygame
 from pygame.locals import *
 
 import constants
-from entities.buttons.level_selector import Level_Selector
-from entities.buttons.system import System
+from entities.hud import HUD
 from fonts import text
 from img.images import IMAGES
-from logic import graphics, collisions
+from logic import graphics
 from sound import sounds
 from controls import keyboard, mouse
 # from dice.dice import Dice, Crit_Dice
@@ -51,29 +50,10 @@ def draw_debug_visuals():
 
 def main():
 
-    if constants.SHOW_DEBUG:
-        music_start = 1
-    else:
-        music_start = 0
-    back_button = System(0, 0, 125, 125, "back")
-    music_button = System(125, 0, 125, 125, "music", music_start)
-    action_button = System(constants.GAME_WIDTH - 125, 0, 125, 125, "action")
-
-    selectors = []
-    x_location = 5
-    y_location = constants.HUD_HEIGHT + 5
-    selector_width = 160
-    selector_height = 110
-    for num in range(1, constants.NUM_LEVELS + 1):
-        selectors.append(Level_Selector(x_location, y_location, selector_width, selector_height, num))
-        x_location += selector_width + 5
-        if x_location + selector_width > constants.GAME_WIDTH:
-            x_location = 5
-            y_location += selector_height + 5
-
     running = True
     game_state = constants.AUTHORS
     current_level = None
+    hud = HUD()
 
     if not constants.SHOW_DEBUG:
         sounds.start_music()
@@ -108,11 +88,10 @@ def main():
         elif game_state == constants.LEVEL_SELECT:
 
             graphics.fill_game_rect(window, constants.BLACK)
-            for s in selectors:
-                s.go(window)
-                if mouse.controls['click'] and collisions.rect_point(s.get_rect(), mouse.controls['pos']):
-                    current_level = s.get_target()
-                    game_state = constants.GAMEPLAY
+            new_level = hud.handle_selectors(window)
+            if new_level is not None:
+                current_level = new_level
+                game_state = constants.GAMEPLAY
 
         elif game_state == constants.UPGRADES:
 
@@ -155,37 +134,7 @@ def main():
         else:
             raise ValueError("Invalid game state!")
 
-        # Handle system buttons
-
-        if game_state > constants.SPLASH:
-
-            if game_state != constants.PAUSE:
-                music_button.go(window)
-                if mouse.controls['click'] and collisions.rect_point(music_button.get_rect(), mouse.controls['pos']):
-                    if music_button.get_state() == "audible":
-                        sounds.stop_music()
-                    else:  # music_button.get_state() == "muted"
-                        sounds.start_music()
-                    music_button.change_state()
-
-            if game_state < constants.PAUSE:
-
-                back_button.go(window)
-                if mouse.controls['click'] and collisions.rect_point(back_button.get_rect(), mouse.controls['pos']):
-                    if game_state == constants.GAMEPLAY:
-                        game_state -= 2
-                    else:
-                        game_state -= 1
-
-            if game_state == constants.GAMEPLAY or game_state == constants.PAUSE:
-
-                action_button.go(window)
-                if mouse.controls['click'] and collisions.rect_point(action_button.get_rect(), mouse.controls['pos']):
-                    if action_button.get_state() == "pause":
-                        game_state = constants.PAUSE
-                    else:  # action_button.get_state() == "play"
-                        game_state = constants.GAMEPLAY
-                    action_button.change_state()
+        game_state = hud.handle_system_buttons(window, game_state)
 
         if constants.SHOW_DEBUG:
             fps = text.MULI[15].render(str(round(clock.get_fps(), 1)), True, constants.WHITE)

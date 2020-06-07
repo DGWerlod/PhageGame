@@ -148,6 +148,11 @@ IMAGES = {
             pygame.image.load("img/buttons/summoners/buttonpult-inactive.png")
         ]
     },
+    constants.B_PULT + "_projectile": {
+        "fly": [
+            pygame.image.load("img/buttons/buffteriophage/frameprojectile.png")
+        ]
+    },
     "macrophage_wall": {
         "static": [
             pygame.transform.scale(pygame.image.load("img/walls/cellswall.png"), (90, constants.GAME_HEIGHT // 8 * 3))
