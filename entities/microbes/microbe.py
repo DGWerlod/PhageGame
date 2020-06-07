@@ -52,6 +52,7 @@ class Microbe(Mortal):
 
     def check_projectile(self):
         if self._projectile_queued:
+            self._projectile_queued = False
             return self.make_projectile()
         return None
 
