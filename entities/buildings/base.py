@@ -23,3 +23,6 @@ class Base(Mortal):
             raise ValueError("Wrong allegiance passed to Base.__init__().")
         super().__init__(x_location, Y_LOCATION, WIDTH, HEIGHT, hp, HEALTH_BAR_OFFSET, name, "static")
         self._allegiance = allegiance
+
+    def get_allegiance(self):
+        return self._allegiance

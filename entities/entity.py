@@ -20,6 +20,10 @@ class Entity(object):
     def get_name(self):
         return self._name
 
+    # subclasses with an allegiance MUST override this function
+    def get_allegiance(self):
+        raise Exception("get_allegiance() called on non-allegiant Entity.")
+
     def change_animation(self, new_animation_key, new_animation_spd=None):
         self._current_animation = new_animation_key
         self._animation_cycle = 0

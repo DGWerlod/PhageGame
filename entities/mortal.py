@@ -23,7 +23,7 @@ class Mortal(Entity):
     def apply_damage(self, dmg):
         self._hp -= dmg
         if constants.SHOW_DEBUG:
-            print(self._name + "is hit for " + dmg + " damage! (" + str(self._hp) + " hp remaining)")
+            print(self._name + " is hit for " + str(dmg) + " damage! (" + str(self._hp) + " hp remaining)")
 
     def go(self, display):
         super().go(display)

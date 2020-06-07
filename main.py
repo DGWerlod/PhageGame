@@ -8,7 +8,6 @@ from img.images import IMAGES
 from logic import graphics
 from sound import sounds
 from controls import keyboard, mouse
-# from dice.dice import Dice, Crit_Dice
 
 flags = DOUBLEBUF
 

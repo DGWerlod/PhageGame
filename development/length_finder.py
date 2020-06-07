@@ -13,7 +13,8 @@ files = [
     "../entities/microbes/macrophages/macrophage.py",
     "../fonts/text.py", "../img/images.py",
     "../levels/level.py", "../levels/level_builder.py", "../levels/level_one.py",
-    "../logic/circle.py", "../logic/collisions.py", "../logic/dice.py", "../logic/graphics.py", "../logic/circle.py",
+    "../logic/circle.py", "../logic/collisions.py", "../logic/dice.py", "../logic/graphics.py",
+    "../logic/positions.py", "../logic/rect.py",
     "../sound/sounds.py"
 ]
 

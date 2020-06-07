@@ -31,10 +31,6 @@ class Microbe(Mortal):
         self._cooldown_left = 0
         self._projectile_queued = False
 
-    # subclasses MUST override this function
-    def get_allegiance(self):
-        raise Exception("Something isn't right - you shouldn't be seeing this message!")
-
     def set_in_front(self, in_front):
         self._in_front = in_front
 
@@ -49,7 +45,7 @@ class Microbe(Mortal):
         if self._dmg != 0:
             raise Exception("A microbe that doesn't throw projectiles cannot make one!")
         else:
-            raise Exception("Something isn't right - you shouldn't be seeing this message!")
+            raise Exception("Microbe.make_projectile() was not overridden by projectile-throwing subclass.")
 
     # subclasses that use projectiles may override this function
     def get_range_rect(self):
@@ -75,10 +71,10 @@ class Microbe(Mortal):
             if self._in_front and self._animation_cycle == self._attack_key_frame * self._animation_spd:
                 if self._dmg != 0:
                     self._in_front.apply_damage(self._dmg)
-                    if constants.SHOW_DEBUG:
-                        print(self._name + " attacks!")
                 else:
                     self._projectile_queued = True
+                if constants.SHOW_DEBUG:
+                    print(self._name + " attacks!")
             elif self._animation_looped:
                 self.change_animation(WALK_ANIMATION_KEY, WALK_ANIMATION_SPEED)
 

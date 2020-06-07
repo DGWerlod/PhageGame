@@ -29,3 +29,6 @@ class Wall(Mortal):
         super().__init__(x_location, Y_LOCATION, WIDTH, HEIGHT, hp, HEALTH_BAR_OFFSET, name, "static")
         self._allegiance = allegiance
         self._tier_number = tier_number
+
+    def get_allegiance(self):
+        return self._allegiance

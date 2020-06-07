@@ -10,8 +10,8 @@ class Die(object):
     def roll(self):
         # print("Rolling...")
         num = random.randint(1, self.sides)
-        if constants.SHOW_DEBUG:
-            print("You rolled a %s" % (str(num)))
+        # if constants.SHOW_DEBUG:
+        #     print("You rolled a %s" % (str(num)))
         return num
 
 
