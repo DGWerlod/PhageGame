@@ -53,7 +53,7 @@ class Microbe(Mortal):
 
     # subclasses that use projectiles may override this function
     def get_range_rect(self):
-        return Rect(self._x + self._w*2*(1 if self.get_allegiance() else -1), self._y, self._w, self._h)
+        return Rect(self._x + self._w*(1 if self.get_allegiance() else -1), self._y, self._w*2, self._h)
 
     def check_projectile(self):
         if self._projectile_queued:
