@@ -97,7 +97,7 @@ def _projectile_actions(window, projectiles,
         else:  # p is a bacteriophage projectile
             p_rect = p.get_rect()
             on_screen = p_rect.X + p_rect.W > 0
-        if p.is_alive() and on_screen:
+        if p.is_active() and on_screen:
             projectiles_remaining.add(p)
     return projectiles_remaining
 

@@ -55,7 +55,7 @@ IMAGES = {
         "attack": [
             pygame.transform.scale(pygame.image.load("img/buffteriopult/framePA2 copy 3.png"), (125, 125)),
             pygame.transform.scale(pygame.image.load("img/buffteriopult/framePA1.png"), (125, 125)),
-            pygame.transform.scale(pygame.image.load("img/buffteriopult/framePA3 copy 3.png"), (125, 125)),
+            pygame.transform.scale(pygame.image.load("img/buffteriopult/framePA3.png"), (125, 125)),
             pygame.transform.scale(pygame.image.load("img/buffteriopult/framePA3.png"), (125, 125)),
             pygame.transform.scale(pygame.image.load("img/buffteriopult/framePA3.png"), (125, 125)),
             pygame.transform.scale(pygame.image.load("img/buffteriopult/framePA2 copy 4.png"), (125, 125)),
@@ -150,7 +150,7 @@ IMAGES = {
     },
     constants.B_PULT + "_projectile": {
         "fly": [
-            pygame.image.load("img/buttons/buffteriophage/frameprojectile.png")
+            pygame.transform.scale(pygame.image.load("img/buffteriopult/frameprojectile.png"), (50,50))
         ]
     },
     "macrophage_wall": {

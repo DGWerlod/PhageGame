@@ -1,5 +1,5 @@
 import constants
-from entities.bacteriophages.bacteriophage import Bacteriophage
+from entities.microbes.bacteriophages.bacteriophage import Bacteriophage
 from entities.projectile import Projectile
 
 class B_Pult(Bacteriophage):
