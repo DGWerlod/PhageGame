@@ -37,6 +37,7 @@ M_BASIC = "macrophoot"
 B_BASIC = "buffteriophage"
 B_TANK = "tankphage"
 M_BEACH = "macrobeach"
+B_PULT = "buffteriopult"
 
 # DEBUG
 SHOW_DEBUG = False

@@ -3,7 +3,7 @@ import pygame.image
 import constants
 
 IMAGES = {
-    "buffteriophage": {
+    constants.B_BASIC: {
         "walk": [
             pygame.transform.scale(pygame.image.load("img/buffteriophage/frame1.png"), (125, 125)),
             pygame.transform.scale(pygame.image.load("img/buffteriophage/frame2.png"), (125, 125)),
@@ -24,7 +24,7 @@ IMAGES = {
             pygame.transform.scale(pygame.image.load("img/buffteriophage/frame3.png"), (125, 125))
         ]
     },
-    "tankphage": {
+    constants.B_TANK: {
         "walk": [
             pygame.transform.scale(pygame.image.load("img/tankphage/1 copy.png"), (125, 125)),
             pygame.transform.scale(pygame.image.load("img/tankphage/2 copy.png"), (125, 125)),
@@ -41,7 +41,32 @@ IMAGES = {
             pygame.transform.scale(pygame.image.load("img/tankphage/frame1.png"), (125, 125))
         ]
     },
-    "macrophoot": {
+    constants.B_PULT: {
+        "walk": [
+            pygame.transform.scale(pygame.image.load("img/buffteriopult/frameP1.png"), (125, 125)),
+            pygame.transform.scale(pygame.image.load("img/buffteriopult/frameP2.png"), (125, 125)),
+            pygame.transform.scale(pygame.image.load("img/buffteriopult/frameP3.png"), (125, 125)),
+            pygame.transform.scale(pygame.image.load("img/buffteriopult/frameP4.png"), (125, 125)),
+            pygame.transform.scale(pygame.image.load("img/buffteriopult/frameP5.png"), (125, 125)),
+            pygame.transform.scale(pygame.image.load("img/buffteriopult/frameP6.png"), (125, 125)),
+            pygame.transform.scale(pygame.image.load("img/buffteriopult/frameP7.png"), (125, 125)),
+            pygame.transform.scale(pygame.image.load("img/buffteriopult/frameP8.png"), (125, 125))
+        ],
+        "attack": [
+            pygame.transform.scale(pygame.image.load("img/buffteriopult/framePA2 copy 3.png"), (125, 125)),
+            pygame.transform.scale(pygame.image.load("img/buffteriopult/framePA1.png"), (125, 125)),
+            pygame.transform.scale(pygame.image.load("img/buffteriopult/framePA3 copy 3.png"), (125, 125)),
+            pygame.transform.scale(pygame.image.load("img/buffteriopult/framePA3.png"), (125, 125)),
+            pygame.transform.scale(pygame.image.load("img/buffteriopult/framePA3.png"), (125, 125)),
+            pygame.transform.scale(pygame.image.load("img/buffteriopult/framePA2 copy 4.png"), (125, 125)),
+            pygame.transform.scale(pygame.image.load("img/buffteriopult/framePA2 copy.png"), (125, 125)),
+            pygame.transform.scale(pygame.image.load("img/buffteriopult/framePA2 copy 2.png"), (125, 125))
+        ],
+        "static": [
+            pygame.transform.scale(pygame.image.load("img/buffteriopult/framePA2 copy 3.png"), (125, 125))
+        ]
+    },
+    constants.M_BASIC: {
         "walk": [
             pygame.transform.scale(pygame.image.load("img/macrophoot/frame1.png"), (125, 125)),
             pygame.transform.scale(pygame.image.load("img/macrophoot/frame2.png"), (125, 125)),
@@ -62,7 +87,7 @@ IMAGES = {
             pygame.transform.scale(pygame.image.load("img/macrophoot/frame1.png"), (125, 125))
         ]
     },
-    "macrobeach": {
+    constants.M_BEACH: {
         "walk": [
             pygame.transform.scale(pygame.image.load("img/macrobeach/frame1.png"), (125, 125)),
             pygame.transform.scale(pygame.image.load("img/macrobeach/frame2.png"), (125, 125)),
@@ -113,6 +138,14 @@ IMAGES = {
         ],
         "inactive": [
             pygame.image.load("img/buttons/summoners/beachbutton-inactive.png")
+        ]
+    },
+    constants.B_PULT + "_summoner": {
+        "active": [
+            pygame.image.load("img/buttons/summoners/buttonpult.png")
+        ],
+        "inactive": [
+            pygame.image.load("img/buttons/summoners/buttonpult-inactive.png")
         ]
     },
     "macrophage_wall": {

@@ -20,8 +20,9 @@ class Level_One(Level):
                          Base(constants.MACROPHAGE_SIDE),
 
                          [
-                            constants.B_TANK,
-                            constants.B_BASIC
+                            constants.B_BASIC,
+                            constants.B_PULT,
+                            constants.B_TANK
                          ],
                          [
                              Wall(constants.BACTERIOPHAGE_SIDE, 3),
