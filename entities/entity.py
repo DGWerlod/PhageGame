@@ -3,7 +3,7 @@ from logic.rect import Rect
 
 
 class Entity(object):
-    def __init__(self, x, y, w, h, name=None, current_animation=None, animation_spd=0):
+    def __init__(self, x, y, w, h, name=None, current_animation=None, animation_spd=0, hitbox_offsets=(0, 0, 0, 0)):
         self._x = x
         self._y = y
         self._w = w
@@ -13,9 +13,11 @@ class Entity(object):
         self._animation_spd = animation_spd   # the number of frames for which a single animation frame should be shown
         self._animation_cycle = 0  # current frame to be displayed is the floor of this value divided by _animation_spd
         self._animation_looped = False
+        self._hitbox_offsets = hitbox_offsets  # (x, y, w, h)
 
     def get_rect(self):
-        return Rect(self._x, self._y, self._w, self._h)
+        return Rect(self._x + self._hitbox_offsets[0], self._y + self._hitbox_offsets[1],
+                    self._w + self._hitbox_offsets[2], self._h + self._hitbox_offsets[3])
 
     def get_name(self):
         return self._name

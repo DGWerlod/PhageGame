@@ -59,9 +59,10 @@ def main():
 
     while running:
 
-        window.fill(constants.GREY)
+        if keyboard.controls['pressed']['key_escape']:
+            constants.SHOW_DEBUG = not constants.SHOW_DEBUG
 
-        # Process according to game_state
+        window.fill(constants.GREY)
 
         if game_state == constants.AUTHORS:
 
