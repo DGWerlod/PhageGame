@@ -40,4 +40,4 @@ M_BEACH = "macrobeach"
 B_PULT = "buffteriopult"
 
 # DEBUG
-SHOW_DEBUG = False
+SHOW_DEBUG = True

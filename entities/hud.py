@@ -9,6 +9,10 @@ LEVEL_SELECTOR_WIDTH = 160
 LEVEL_SELECTOR_HEIGHT = 110
 
 
+def _is_clicked(subject):
+    return mouse.controls['click'] and collisions.rect_point(subject.get_rect(), mouse.controls['pos'])
+
+
 class HUD(object):
     def __init__(self):
 
@@ -19,6 +23,9 @@ class HUD(object):
         self._back_button = System(0, 0, 125, 125, "back")
         self._music_button = System(125, 0, 125, 125, "music", music_start)
         self._action_button = System(constants.GAME_WIDTH - 125, 0, 125, 125, "action")
+
+        self._use_ai = False
+        self._ai_button = System(constants.CENTER_X - 125 // 2, 0, 125, 125, "mode")
 
         self._selectors = []
         x_loc = 5
@@ -33,8 +40,8 @@ class HUD(object):
     def handle_selectors(self, window):
         for s in self._selectors:
             s.go(window)
-            if mouse.controls['click'] and collisions.rect_point(s.get_rect(), mouse.controls['pos']):
-                return s.get_target()
+            if _is_clicked(s):
+                return s.get_target(self._use_ai)
         return None
 
     def handle_system_buttons(self, window, game_state):
@@ -43,33 +50,39 @@ class HUD(object):
 
             if game_state != constants.PAUSE:
                 self._music_button.go(window)
-                if mouse.controls['click']:
-                    if collisions.rect_point(self._music_button.get_rect(), mouse.controls['pos']):
-                        if self._music_button.get_state() == "audible":
-                            sounds.stop_music()
-                        else:  # music_button.get_state() == "muted"
-                            sounds.start_music()
-                        self._music_button.change_state()
+                if _is_clicked(self._music_button):
+                    if self._music_button.get_state() == "audible":
+                        sounds.stop_music()
+                    else:  # music_button.get_state() == "muted"
+                        sounds.start_music()
+                    self._music_button.change_state()
 
             if game_state < constants.PAUSE:
 
                 self._back_button.go(window)
-                if mouse.controls['click']:
-                    if collisions.rect_point(self._back_button.get_rect(), mouse.controls['pos']):
-                        if game_state == constants.GAMEPLAY:
-                            game_state -= 2
-                        else:
-                            game_state -= 1
+                if _is_clicked(self._back_button):
+                    if game_state == constants.GAMEPLAY:
+                        game_state -= 2
+                    else:
+                        game_state -= 1
 
             if game_state == constants.GAMEPLAY or game_state == constants.PAUSE:
 
                 self._action_button.go(window)
-                if mouse.controls['click']:
-                    if collisions.rect_point(self._action_button.get_rect(), mouse.controls['pos']):
-                        if self._action_button.get_state() == "pause":
-                            game_state = constants.PAUSE
-                        else:  # action_button.get_state() == "play"
-                            game_state = constants.GAMEPLAY
-                        self._action_button.change_state()
+                if _is_clicked(self._action_button):
+                    if self._action_button.get_state() == "pause":
+                        game_state = constants.PAUSE
+                    else:  # action_button.get_state() == "play"
+                        game_state = constants.GAMEPLAY
+                    self._action_button.change_state()
+
+            if game_state == constants.LEVEL_SELECT:
+
+                # self._ai_button.go(window)  # TODO: REINSTATE ONCE IMAGE EXISTS
+                if _is_clicked(self._ai_button):
+                    self._use_ai = not self._use_ai
+                    self._ai_button.change_state()
+                    if constants.SHOW_DEBUG:
+                        print("Using AI? " + str(self._use_ai))
 
         return game_state

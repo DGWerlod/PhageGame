@@ -17,8 +17,8 @@ class Level_Selector(Button):
         self._text = (text, text.get_rect(centerx=x+w/2, centery=y+h/2))
         self._pygame_rect = Rect(x, y, w, h)
 
-    def get_target(self):
-        return build_level(self._target_level_number)
+    def get_target(self, use_ai):
+        return build_level(self._target_level_number, use_ai)
 
     def go(self, display):
         pygame.draw.rect(display, constants.GREY, self._pygame_rect)

@@ -61,10 +61,13 @@ def _projectile_actions(window, projectiles, macrophage_mortals, bacteriophage_m
 
 
 class Level(object):
-    def __init__(self, number,
+    def __init__(self, number, use_ai,
                  macrophages_available, macrophage_walls, macrophage_base,
                  bacteriophages_available, bacteriophage_walls, bacteriophage_base,
                  upgrades_enabled=None):
+
+        self._number = number
+        self._use_ai = use_ai
 
         self._macrophage_mortals = [
             set(),  # microbes
@@ -82,18 +85,21 @@ class Level(object):
 
         self._projectiles = set()
 
-        self._number = number
-
         self._upgrades_enabled = upgrades_enabled
 
         x_loc = 0
         for m in macrophages_available:
             self._macrophage_summoners.append(Summoner(x_loc, constants.BOTTOM_HUD, 125, 125, m))
             x_loc += 125
-        x_loc = constants.GAME_WIDTH - 125
-        for b in bacteriophages_available:
-            self._bacteriophage_summoners.append(Summoner(x_loc, constants.BOTTOM_HUD, 125, 125, b))
-            x_loc -= 125
+        if not self._use_ai:
+            x_loc = constants.GAME_WIDTH - 125
+            for b in bacteriophages_available:
+                self._bacteriophage_summoners.append(Summoner(x_loc, constants.BOTTOM_HUD, 125, 125, b))
+                x_loc -= 125
+
+    # subclasses MUST override this method
+    def ai(self):
+        raise Exception("Levels cannot be without AI!")
 
     # 1 is a victory, -1 is defeat, 0 is neither
     def check_winner(self):
@@ -109,6 +115,9 @@ class Level(object):
             window.blit(IMAGES["level"]["background"][self._number - 1], (0, constants.HUD_HEIGHT))
         else:
             graphics.fill_game_rect(window, constants.BLUE)
+
+        if self._use_ai:
+            self.ai()  # let the computer spawn new enemies if it's time
 
         _summoner_actions(window, self._macrophage_summoners, self._macrophage_mortals[MICROBES])
         _summoner_actions(window, self._bacteriophage_summoners, self._bacteriophage_mortals[MICROBES])
