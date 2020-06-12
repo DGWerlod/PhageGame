@@ -200,6 +200,14 @@ IMAGES = {
             pygame.transform.scale(pygame.image.load("img/buttons/system/back.png"), (125, 125))
         ]
     },
+    "mode": {
+        "ai": [
+            pygame.transform.scale(pygame.image.load("img/buttons/system/selection-vsAI.png"), (250, 125))
+        ],
+        "pvp": [
+            pygame.transform.scale(pygame.image.load("img/buttons/system/selection-2plyr.png"), (250, 125))
+        ]
+    },
     "splash": {
         "splash": [
             pygame.transform.scale(pygame.image.load("img/splash.png"), (1200, 750))

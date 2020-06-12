@@ -31,10 +31,10 @@ microbe_projectile_damages = {
 }
 
 summoner_cooldowns = {
-    constants.B_BASIC: 33,
-    constants.B_PULT: 30,
-    constants.B_TANK: 67,
-    constants.M_BASIC: 33,
+    constants.B_BASIC: 30,
+    constants.B_PULT: 50,
+    constants.B_TANK: 70,
+    constants.M_BASIC: 30,
     constants.M_BEACH: 50
 }
 

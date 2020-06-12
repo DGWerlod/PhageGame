@@ -24,8 +24,8 @@ class HUD(object):
         self._music_button = System(125, 0, 125, 125, "music", music_start)
         self._action_button = System(constants.GAME_WIDTH - 125, 0, 125, 125, "action")
 
-        self._use_ai = False
-        self._ai_button = System(constants.CENTER_X - 125 // 2, 0, 125, 125, "mode")
+        self._use_ai = True
+        self._ai_button = System(constants.CENTER_X - 250 // 2, 0, 250, 125, "mode")
 
         self._selectors = []
         x_loc = 5
@@ -78,7 +78,7 @@ class HUD(object):
 
             if game_state == constants.LEVEL_SELECT:
 
-                # self._ai_button.go(window)  # TODO: REINSTATE ONCE IMAGE EXISTS
+                self._ai_button.go(window)  # TODO: REINSTATE ONCE IMAGE EXISTS
                 if _is_clicked(self._ai_button):
                     self._use_ai = not self._use_ai
                     self._ai_button.change_state()
