@@ -1,6 +1,6 @@
 # PhageGame
 
-Virtual CodeDay Project w/ Desmond Kamas (Derskerm) and Miguel V. (Kaweees)
+Virtual CodeDay Project w/ Desmond Kamas (desdotdat) and Miguel V. (Kaweees)
 
 ![Buffteriophage](img/buffteriophage2.png "Buffteriophage")
 
